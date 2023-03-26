@@ -8,7 +8,6 @@ import {
   Top3MaskSection,
 } from "../../styles/MainPageStyle";
 import { TopMaskImg } from "../../styles/MainPageStyle";
-
 import { putClick } from "../../api/mask/putClick";
 
 function TopThree({ topMask }) {
@@ -31,7 +30,7 @@ function TopThree({ topMask }) {
       <Top3ArticleSection>
         <Top3BlankSection></Top3BlankSection>
         <Top3Article>MASINSA AWARDS</Top3Article>
-        <IntroLinkBox href="Introduce/Masinsa">
+        <IntroLinkBox href="introduce/masinsa">
           {/* Do you want know about MASNSA? */}
           What is MASINSA?
         </IntroLinkBox>
@@ -44,7 +43,7 @@ function TopThree({ topMask }) {
             topMask.map((top) => (
               <div key={top.id}>
                 <a
-                  href={`/aboutMask/${top.id}/Masinsa`}
+                  href={`/about/${top.id}`}
                   style={{
                     textDecoration: "none",
                   }}

@@ -7,7 +7,6 @@ export const getUserInfo = async ({ accessToken, setUserInfo }) => {
     })
     .then((response) => {
       setUserInfo(response.data.result);
-      // return response.data.result;
     })
     .catch((e) => alert(e.message));
 };

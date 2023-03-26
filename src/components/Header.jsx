@@ -1,73 +1,145 @@
-// 맨 위: 마신사 로고, 마이페이지 버튼, 네이버 로그인 버튼, 차단지수 카테고리
-import React from "react";
-import {
-  HeaderSection,
-  TopDiv,
-  LogoImg,
-  TopBtnDiv,
-  BockingIndexNav,
-  BlockingBtn,
-} from "../styles/HeaderStyle";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { UserLoginContext } from "../context/UserLoginContext";
+import { BsPersonHearts } from "react-icons/bs";
+import { MdLogout, MdLogin } from "react-icons/md";
 
 function Header() {
-  // const { state: userInfo } = useLocation();
+  const { isLogin } = useContext(UserLoginContext);
 
   // 로그아웃 => 세션쿠키, accessToken 삭제
   const naverLogout = () => {
     //user정보 삭제
     sessionStorage.removeItem("acessToken");
-    // reload : 새로고침
-    window.location.reload();
+    // main 페이지로 이동
+    window.location.href = "/";
   };
 
   return (
     <div>
-      <HeaderSection>
-        <TopDiv>
-          {/* 마신사로고 : home버튼 */}
-          <a href="/">
-            {/* 로고이미지 : public 폴더에 넣은 후, 경로지정 */}
-            <LogoImg src={`/images/masinsa-logo.png`} alt="masinsa"></LogoImg>
-          </a>
-          <TopBtnDiv>
-            <a href="/login/masinsa">
-              <Btn>LOGIN</Btn>
-            </a>
-            <Btn onClick={naverLogout}>LOGOUT</Btn>
-          </TopBtnDiv>
-        </TopDiv>
-        <BockingIndexNav>
-          <a href="/MaskList/Masinsa/KF94">
-            <BlockingBtn>KF94</BlockingBtn>
-          </a>
-          <a href="/MaskList/Masinsa/KF80">
-            <BlockingBtn>KF80</BlockingBtn>
-          </a>
-          <a href="/MaskList/Masinsa/OTHER">
-            <BlockingBtn>OTHER</BlockingBtn>
-          </a>
-        </BockingIndexNav>
-      </HeaderSection>
+      <Hedaer>
+        {/* 마신사로고 : home버튼 */}
+        <a href="/">
+          {/* 로고이미지 : public 폴더에 넣은 후, 경로지정 */}
+          <Img src={`/images/masinsa-logo.png`} alt="masinsa-logo" />
+        </a>
+        {isLogin ? (
+          <BtnGroup>
+            <Btn>
+              <Icon>
+                <BsPersonHearts />
+              </Icon>
+              <P>MY PAGE</P>
+            </Btn>
+            <Btn onClick={() => naverLogout()}>
+              <Icon>
+                <MdLogout />
+              </Icon>
+              <P>LOGOUT</P>
+            </Btn>
+          </BtnGroup>
+        ) : (
+          <BtnGroup>
+            <Btn onClick={() => window.location.assign("/login/masinsa")}>
+              <Icon>
+                <MdLogin />
+              </Icon>
+              <P>LOGIN</P>
+            </Btn>
+          </BtnGroup>
+        )}
+      </Hedaer>
+      {/* Navigation Bar */}
+      <NavWrapper>
+        <NavContainer>
+          <Btn onClick={() => window.location.assign("/maskList/KF94")}>
+            KF94
+          </Btn>
+          <Btn onClick={() => window.location.assign("/maskList/KF80")}>
+            KF80
+          </Btn>
+          <Btn onClick={() => window.location.assign("/maskList/OTHER")}>
+            OTHER
+          </Btn>
+        </NavContainer>
+      </NavWrapper>
     </div>
   );
 }
 
 export default Header;
 
-export const Btn = styled.button`
-  width: 150px;
-  height: 30px;
-  font-weight: 500;
-  border: 1px solid white;
-  border-radius: 3px;
-  border-style: dashed;
+export const Hedaer = styled.div`
+  max-width: 1200px;
+  height: 80px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0px auto;
+  @media (max-width: 768px) {
+    height: 70px;
+  }
+`;
+
+export const Img = styled.img`
+  width: 200px;
+  transition: 0.5s ease;
+  @media (max-width: 768px) {
+    width: 150px;
+  }
+`;
+
+export const BtnGroup = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+`;
+
+export const Icon = styled.div`
+  font-size: 25px;
+`;
+
+export const Btn = styled.div`
+  width: 80px;
+  margin: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
   background: none;
   cursor: pointer;
-  color: white;
-  &:active {
-    text-decoration: underline;
-    box-shadow: 1px 1px 2px white;
+  color: #094a23;
+  transition: 0.3s ease;
+  &:hover {
+    color: #05735f;
   }
-  margin-bottom: 10px;
+  &:active {
+    color: #05735f;
+    text-decoration: underline;
+  }
+`;
+
+export const P = styled.p`
+  margin: 0px;
+  display: block;
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+export const NavWrapper = styled.div`
+  height: 40px;
+  margin: 0 auto;
+  background: #92b69c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const NavContainer = styled.div`
+  width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 `;

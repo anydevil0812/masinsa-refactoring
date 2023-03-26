@@ -2,10 +2,7 @@ import styled from "styled-components";
 
 // 전체화면
 export const Wrapper = styled.div`
-  width: auto;
-  // 600px 이하로 줄어들지 않도록 설정
-  min-width: 1400px;
-  // border: 2px solid blue;
+  width: 1200px;
 `;
 
 // Header 제외한 화면의 내용부분 : MainWrapper
@@ -62,10 +59,10 @@ export const FixedRecentView = styled.div`
   width: 75px;
   height: 250px;
   padding: 10px;
-  background: #e5ffe9;
+  background: #92b69c;
   border: 0px;
   border-radius: 6px;
-  color: #05735f;
+  color: #094a23;
   text-align: left;
   font-size: 13px;
   font-weight: 800;
@@ -80,7 +77,6 @@ export const RecentViewImgDiv = styled.div`
   border: 1px solid #d9d9d9;
   border-radius: 5px;
   margin: 5px 0px;
-  // background: #fff;
 `;
 
 // 최근 본 상품 Img

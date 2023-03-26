@@ -1,22 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
 import { getUserInfo } from "../../api/getUserInfo";
+import { UserLoginContext } from "../../context/UserLoginContext";
 import { setCookie } from "../../cookie";
 
-export default function NaverLoginBtn() {
+export default function NaverLogin() {
   // naver client
   const NAVER_CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
   const NAVER_CALLBACK_URL = process.env.REACT_APP_CALLBACK_URL;
-  // 윈도우 객체에 있는 네이버에 로그인 함수를 이용
+  // 윈도우 객체에 있는 네이버에 로그인 함수 이용
   const { naver } = window;
-  // 로그인 여부
-  const [isLogin, setIsLogin] = useState(false);
-  // 유저 access token
+  // access token
   const [accessToken, setAccessToken] = useState();
-  // 유저 정보 설정
-  const [userInfo, setUserInfo] = useState();
-  //
-  const navigate = useNavigate();
+  // 로그인여부 & 유저 정보 => UserLoginContext
+  const { setIsLogin, isLogin, setUserInfo } = useContext(UserLoginContext);
 
   const naverLogin = () => {
     const login = new naver.LoginWithNaverId({
@@ -45,18 +41,15 @@ export default function NaverLoginBtn() {
     naverLogin();
   }, []);
 
-  // console.log(accessToken, isLogin);
-
-  // 유저정보 받아오기 => 백엔드에서!
+  // 로그인이 완료되면, 백엔드에 accessToken과 함께 사용자 정보요청
   useEffect(() => {
     isLogin && getUserInfo({ accessToken, setUserInfo });
-    if (userInfo) {
-      navigate("/", { state: { userInfo, isLogin } });
-    }
-  }, [isLogin, accessToken, userInfo, navigate]);
+  }, [isLogin, accessToken, setUserInfo]);
 
   return (
-    // 네이버 로그인 버튼이 표시 될 div태그에 id='naverIdLogin' 을 추가
-    <div id="naverIdLogin"></div>
+    <>
+      {/* 네이버 로그인 버튼이 표시 될 div태그에 id='naverIdLogin' 을 추가 */}
+      <div id="naverIdLogin"></div>
+    </>
   );
 }

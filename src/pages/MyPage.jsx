@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
 import { getWishlist } from "../api/wishlist/getWishlist";
 import MyWishLists from "../components/personal/MyWishLists";
+import { UserLoginContext } from "../context/UserLoginContext";
 import {
   MyPageArticle,
   MyPageBox,
@@ -11,7 +11,7 @@ import {
 import { MainWrapper } from "../styles/OtherStyles";
 
 function MyPage() {
-  const { state: userInfo } = useLocation();
+  const { userInfo } = useContext(UserLoginContext);
 
   // console.log("유저", userInfo);
 

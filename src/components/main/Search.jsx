@@ -15,9 +15,7 @@ import { getMainMask } from "../../api/mask/getMainMask";
 import { getSearchMaskSort } from "../../api/mask/getSearchMaskSort";
 
 // 메인페이지 마스크리스트 조회
-function Search({ userInfo }) {
-  // console.log(userInfo);
-
+function Search() {
   // 키워드 설정
   const [keyword, setKeyWord] = useState("");
   // console.log("keyword : ", keyword);
@@ -65,11 +63,7 @@ function Search({ userInfo }) {
       {/* 마스크리스트 부분*/}
       <SearchMaskListSection>
         {/* 마스크리스트 */}
-        <SearchMaskLists
-          maskList={maskList}
-          keyword={keyword}
-          userInfo={userInfo}
-        />
+        <SearchMaskLists maskList={maskList} keyword={keyword} />
       </SearchMaskListSection>
     </div>
   );

@@ -13,10 +13,7 @@ import {
 } from "../../styles/MaskListStyles";
 import { putClick } from "../../api/mask/putClick";
 
-function SearchMaskLists({ maskList, keyword, userInfo }) {
-  // console.log(userInfo);
-  // console.log("SearchMaskLists : ", maskList);
-
+function SearchMaskLists({ maskList, keyword }) {
   const [isClick, setIsClick] = useState(false);
   const [clickMaskId, setClickMaskId] = useState();
   // console.log(isClick);
@@ -55,7 +52,7 @@ function SearchMaskLists({ maskList, keyword, userInfo }) {
                     {/* 마스크썸네일 */}
                     {mask.thumbnail ? (
                       <a
-                        href={`/aboutMask/${mask.id}/Masinsa`}
+                        href={`/about/${mask.id}`}
                         onClick={() => {
                           setIsClick(true);
                           setClickMaskId(mask.id);
@@ -66,7 +63,7 @@ function SearchMaskLists({ maskList, keyword, userInfo }) {
                       </a>
                     ) : (
                       <a
-                        href={`/aboutMask/${mask.id}/Masinsa`}
+                        href={`/about/${mask.id}`}
                         onClick={() => {
                           setIsClick(true);
                           setClickMaskId(mask.id);
@@ -82,7 +79,7 @@ function SearchMaskLists({ maskList, keyword, userInfo }) {
                     <MaskSummaryContent>
                       {/* 이름 */}
                       <MaskSummaryTitleLinkBox
-                        href={`/aboutMask/${mask.id}/Masinsa`}
+                        href={`/about/${mask.id}`}
                         onClick={() => {
                           setIsClick(true);
                           setClickMaskId(mask.id);
@@ -92,7 +89,7 @@ function SearchMaskLists({ maskList, keyword, userInfo }) {
                       </MaskSummaryTitleLinkBox>
                       {/* 가격 (링크) */}
                       <MaskSummaryPriceLinkBox
-                        href={`/aboutMask/${mask.id}/Masinsa`}
+                        href={`/about/${mask.id}`}
                         onClick={() => {
                           setIsClick(true);
                           setClickMaskId(mask.id);
@@ -112,7 +109,7 @@ function SearchMaskLists({ maskList, keyword, userInfo }) {
                       <MaskBottom>
                         <MaskScore>평점 : {mask.avgScore}⭐</MaskScore>
                         {/* 찜버튼 */}
-                        <WishBtn maskId={mask.id} userInfo={userInfo} />
+                        <WishBtn maskId={mask.id} />
                       </MaskBottom>
                     </MaskSummaryContent>
                   </MaskSummaryBox>
@@ -125,7 +122,6 @@ function SearchMaskLists({ maskList, keyword, userInfo }) {
               marginBottom: "10px",
               fontSize: "10px",
               fontWeight: "800",
-              // border: "1px solid red",
               paddingBottom: "10px",
               paddingTop: "2px",
             }}

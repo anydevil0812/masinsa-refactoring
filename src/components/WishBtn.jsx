@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { postWishlist } from "../api/wishlist/postWishlist";
 import { putWishlist } from "../api/wishlist/putWishlist";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import styled from "styled-components";
+import { UserLoginContext } from "../context/UserLoginContext";
 
-function WishBtn({ maskId, userInfo }) {
+function WishBtn({ maskId }) {
+  const { userInfo } = useContext(UserLoginContext);
   // 찜버튼 클릭확인
   const [isClick, setIsClick] = useState(false);
   // 사용자 Id

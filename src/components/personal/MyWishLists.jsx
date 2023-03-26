@@ -40,7 +40,7 @@ function MyWishLists({ wishList, memberId }) {
                 // border: "1px solid red",
               }}
             >
-              <a href={`/aboutMask/${wish.maskId}/Masinsa`}>
+              <a href={`/about/${wish.maskId}`}>
                 {/* wish 마스크 이미지 */}
                 <div
                   style={{
