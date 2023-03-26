@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 /* Top3 부분 section */

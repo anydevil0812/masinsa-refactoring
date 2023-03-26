@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 // 로고 + 로그인, 마이페이지 + 차단지수가 담긴 header div

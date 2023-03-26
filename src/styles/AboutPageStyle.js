@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 // 마스크상세페이지 Wrapper

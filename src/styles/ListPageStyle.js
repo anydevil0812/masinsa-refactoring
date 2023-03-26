@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 /* 리스트 페이지 기본 Section 나눈거 */

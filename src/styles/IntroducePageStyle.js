@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 // "~~하셨다구요?" 부분 Div
