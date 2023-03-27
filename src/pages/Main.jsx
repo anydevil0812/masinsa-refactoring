@@ -13,22 +13,20 @@ function Main() {
   }, []);
 
   return (
-    <div>
-      <MainWrapper>
-        {/* TOP3 */}
-        {/* <Top3Section> */}
-        {topMask && (
-          // 만약 Best 값이 존재한다면 보여주기 !
-          <Top3Section>
-            <TopThree topMask={topMask} />
-          </Top3Section>
-        )}
-        {/* 키워드검색결과 MakList 띄워주는 부분 */}
-        <SearchSection>
-          <Search />
-        </SearchSection>
-      </MainWrapper>
-    </div>
+    <MainWrapper>
+      {/* TOP3 */}
+      {/* <Top3Section> */}
+      {topMask && (
+        // 만약 Best 값이 존재한다면 보여주기 !
+        <Top3Section>
+          <TopThree topMask={topMask} />
+        </Top3Section>
+      )}
+      {/* 키워드검색결과 MakList 띄워주는 부분 */}
+      <SearchSection>
+        <Search />
+      </SearchSection>
+    </MainWrapper>
   );
 }
 

@@ -10,7 +10,7 @@ function Login() {
 
   const goMain = () => {
     if (isLogin) {
-      navigate("/");
+      navigate("/", { state: isLogin });
     }
   };
 

@@ -17,38 +17,40 @@ function Header() {
 
   return (
     <div>
-      <Hedaer>
-        {/* 마신사로고 : home버튼 */}
-        <a href="/">
-          {/* 로고이미지 : public 폴더에 넣은 후, 경로지정 */}
-          <Img src={`/images/masinsa-logo.png`} alt="masinsa-logo" />
-        </a>
-        {isLogin ? (
-          <BtnGroup>
-            <Btn>
-              <Icon>
-                <BsPersonHearts />
-              </Icon>
-              <P>MY PAGE</P>
-            </Btn>
-            <Btn onClick={() => naverLogout()}>
-              <Icon>
-                <MdLogout />
-              </Icon>
-              <P>LOGOUT</P>
-            </Btn>
-          </BtnGroup>
-        ) : (
-          <BtnGroup>
-            <Btn onClick={() => window.location.assign("/login/masinsa")}>
-              <Icon>
-                <MdLogin />
-              </Icon>
-              <P>LOGIN</P>
-            </Btn>
-          </BtnGroup>
-        )}
-      </Hedaer>
+      <HeaderWrapper>
+        <Hedaer>
+          {/* 마신사로고 : home버튼 */}
+          <a href="/">
+            {/* 로고이미지 : public 폴더에 넣은 후, 경로지정 */}
+            <Img src={`/images/masinsa-logo.png`} alt="masinsa-logo" />
+          </a>
+          {isLogin ? (
+            <BtnGroup>
+              <Btn>
+                <Icon>
+                  <BsPersonHearts />
+                </Icon>
+                <P>MY PAGE</P>
+              </Btn>
+              <Btn onClick={() => naverLogout()}>
+                <Icon>
+                  <MdLogout />
+                </Icon>
+                <P>LOGOUT</P>
+              </Btn>
+            </BtnGroup>
+          ) : (
+            <BtnGroup>
+              <Btn onClick={() => window.location.assign("/login/masinsa")}>
+                <Icon>
+                  <MdLogin />
+                </Icon>
+                <P>LOGIN</P>
+              </Btn>
+            </BtnGroup>
+          )}
+        </Hedaer>
+      </HeaderWrapper>
       {/* Navigation Bar */}
       <NavWrapper>
         <NavContainer>
@@ -69,13 +71,15 @@ function Header() {
 
 export default Header;
 
+export const HeaderWrapper = styled.div`
+  background: ${(props) => props.theme.style.lightGray};
+`;
+
 export const Hedaer = styled.div`
-  max-width: 1200px;
+  max-width: 1150px;
   height: 80px;
+  ${(props) => props.theme.variables.flex("", "space-between", "")};
   padding: 0 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   margin: 0px auto;
   @media (max-width: 768px) {
     height: 70px;
@@ -91,9 +95,7 @@ export const Img = styled.img`
 `;
 
 export const BtnGroup = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+  ${(props) => props.theme.variables.flex("", "space-around", "")};
   position: relative;
 `;
 
@@ -109,13 +111,13 @@ export const Btn = styled.div`
   text-align: center;
   background: none;
   cursor: pointer;
-  color: #094a23;
+  color: ${(props) => props.theme.style.text};
   transition: 0.3s ease;
   &:hover {
-    color: #05735f;
+    color: ${(props) => props.theme.style.textHover};
   }
   &:active {
-    color: #05735f;
+    color: ${(props) => props.theme.style.textHover};
     text-decoration: underline;
   }
 `;
@@ -130,16 +132,12 @@ export const P = styled.p`
 
 export const NavWrapper = styled.div`
   height: 40px;
+  ${(props) => props.theme.variables.flex("", "center", "")};
   margin: 0 auto;
-  background: #92b69c;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: ${(props) => props.theme.style.bg};
 `;
 
 export const NavContainer = styled.div`
   width: 1200px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+  ${(props) => props.theme.variables.flex("", "space-around", "")};
 `;
