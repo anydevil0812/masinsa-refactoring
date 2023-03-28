@@ -8,6 +8,7 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyle from "../src/styles/GlobalStyle";
 import theme from "../src/styles/theme";
 import variables from "../src/styles/variables";
+import Nav from "./components/Nav";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -20,6 +21,7 @@ function App() {
       >
         <GlobalStyle />
         <Header />
+        <Nav />
         <Outlet />
         <RecentView />
         <UpBtn />

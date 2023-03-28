@@ -1,33 +1,55 @@
-// 검색기능
 import React, { useState, useEffect } from "react";
-import SearchBox from "./SearchBox";
 import SearchMaskLists from "./SearchMaskLists";
-import SortChange from "./SortChange";
-import {
-  SearchArticle,
-  SearchBoxSection,
-  SearchCenter,
-  SearchLeftBlank,
-  SortSection,
-  SearchMaskListSection,
-} from "../../styles/MainPageStyle";
 import { getMainMask } from "../../api/mask/getMainMask";
 import { getSearchMaskSort } from "../../api/mask/getSearchMaskSort";
+import styled from "styled-components";
+import { Title } from "../../styles/Common";
+import { FaSearch } from "react-icons/fa";
 
-// 메인페이지 마스크리스트 조회
 function Search() {
   // 키워드 설정
   const [keyword, setKeyWord] = useState("");
-  // console.log("keyword : ", keyword);
 
   // 정렬변경을 위한 상수선언
   const [sortCol, setSortCol] = useState("");
   const [sortOrder, setSortOrder] = useState("");
 
-  // console.log(sortCol, " : ", sortOrder);
-
   // 마스크 리스트
   const [maskList, setMaskList] = useState([]);
+
+  const [inputValue, setInputValue] = useState();
+
+  const onChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const onAdd = () => {
+    setKeyWord(inputValue);
+  };
+
+  // 엔터키 눌렸을 때도 keyword에 값 전달 => 새로고침 안되게 하기
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      setKeyWord(inputValue);
+      e.preventDefault();
+    }
+  };
+
+  const sortValueChagne = (e) => {
+    if (e.target.value === "price") {
+      setSortCol("price");
+      setSortOrder("asc");
+    } else if (e.target.value === "avg_score") {
+      setSortCol("avg_score");
+      setSortOrder("desc");
+    } else if (e.target.value === "click_num") {
+      setSortCol("click_num");
+      setSortOrder("desc");
+    } else {
+      setSortCol("");
+      setSortOrder("");
+    }
+  };
 
   // 처음 페이지 렌더링 시 마스크 요청 : filterMaskSort 이용 ( getMainMask 로 하나 더 만듦)
   useEffect(() => {
@@ -40,33 +62,81 @@ function Search() {
     getSearchMaskSort({ keyword, sortCol, sortOrder, setMaskList });
   }, [sortCol, sortOrder, keyword]);
 
-  // console.log("user-search", user);
-
   return (
-    <div>
-      <hr></hr>
-      <SearchArticle>ALL MASINSA MASK</SearchArticle>
-      <hr></hr>
+    <>
+      <Title>ALL MASINSA MASK</Title>
       {/* 검색창 */}
-      <SearchBoxSection>
-        {/* 왼쪽빈칸 */}
-        <SearchLeftBlank></SearchLeftBlank>
-        {/* 검색창부분 */}
-        <SearchCenter>
-          <SearchBox keyword={keyword} setKeyWord={setKeyWord} />
-        </SearchCenter>
+      <Form>
+        <Input
+          type="search"
+          id="SearchBox"
+          placeholder="ex.중형, 마스크, KF94"
+          autoFocus
+          onChange={onChange}
+          onKeyPress={onKeyPress}
+        />
+        <Icon onClick={onAdd}>
+          <FaSearch />
+        </Icon>
         {/* 정렬변경 */}
-        <SortSection>
-          <SortChange setSortCol={setSortCol} setSortOrder={setSortOrder} />
-        </SortSection>
-      </SearchBoxSection>
+        <SelectBox id="sortChange" onChange={sortValueChagne}>
+          <option value="">정렬기준</option>
+          <option value="price">낮은가격순</option>
+          <option value="avg_score">평점순</option>
+          <option value="click_num">클릭순</option>
+        </SelectBox>
+      </Form>
       {/* 마스크리스트 부분*/}
-      <SearchMaskListSection>
-        {/* 마스크리스트 */}
-        <SearchMaskLists maskList={maskList} keyword={keyword} />
-      </SearchMaskListSection>
-    </div>
+      {/* <SearchMaskLists maskList={maskList} keyword={keyword} /> */}
+    </>
   );
 }
 
 export default Search;
+
+export const Form = styled.form`
+  width: 60%;
+  height: 40px;
+  margin: 20px auto;
+  padding: 0 10px;
+  border: 2px solid ${(props) => props.theme.style.bg};
+  position: relative;
+  transition: 0.5s ease;
+  @media (max-width: 768px) {
+    height: 30px;
+  }
+`;
+
+export const Input = styled.input`
+  width: 100%;
+  height: 100%;
+  outline: none;
+  border: 0;
+  transition: 0.5s ease;
+  @media (max-width: 768px) {
+    font-size: ${(props) => props.theme.style.textXSmall};
+  }
+`;
+
+export const Icon = styled.div`
+  position: absolute;
+  top: 25%;
+  right: 10px;
+  font-size: ${(props) => props.theme.style.textMedium};
+  color: ${(props) => props.theme.style.bg};
+  @media (max-width: 768px) {
+    font-size: ${(props) => props.theme.style.textSmall};
+  }
+`;
+
+export const SelectBox = styled.select`
+  border: 1px solid ${(props) => props.theme.style.bg};
+  position: absolute;
+  top: 25%;
+  right: -100px;
+  opacity: 1;
+  transition: 0.3s ease;
+  @media (max-width: 768px) {
+    opacity: 0;
+  }
+`;

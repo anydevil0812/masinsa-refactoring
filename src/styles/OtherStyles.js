@@ -1,13 +1,8 @@
 import styled from "styled-components";
 
-// 전체화면
-export const Wrapper = styled.div`
-  width: 1200px;
-`;
-
 // Header 제외한 화면의 내용부분 : MainWrapper
 export const MainWrapper = styled.section`
-  width: auto;
+  width: 1200px;
   height: auto;
   margin: 8px auto;
   // border: 2px solid red;

@@ -16,56 +16,40 @@ function Header() {
   };
 
   return (
-    <div>
-      <HeaderWrapper>
-        <Hedaer>
-          {/* 마신사로고 : home버튼 */}
-          <a href="/">
-            {/* 로고이미지 : public 폴더에 넣은 후, 경로지정 */}
-            <Img src={`/images/masinsa-logo.png`} alt="masinsa-logo" />
-          </a>
-          {isLogin ? (
-            <BtnGroup>
-              <Btn>
-                <Icon>
-                  <BsPersonHearts />
-                </Icon>
-                <P>MY PAGE</P>
-              </Btn>
-              <Btn onClick={() => naverLogout()}>
-                <Icon>
-                  <MdLogout />
-                </Icon>
-                <P>LOGOUT</P>
-              </Btn>
-            </BtnGroup>
-          ) : (
-            <BtnGroup>
-              <Btn onClick={() => window.location.assign("/login/masinsa")}>
-                <Icon>
-                  <MdLogin />
-                </Icon>
-                <P>LOGIN</P>
-              </Btn>
-            </BtnGroup>
-          )}
-        </Hedaer>
-      </HeaderWrapper>
-      {/* Navigation Bar */}
-      <NavWrapper>
-        <NavContainer>
-          <Btn onClick={() => window.location.assign("/maskList/KF94")}>
-            KF94
-          </Btn>
-          <Btn onClick={() => window.location.assign("/maskList/KF80")}>
-            KF80
-          </Btn>
-          <Btn onClick={() => window.location.assign("/maskList/OTHER")}>
-            OTHER
-          </Btn>
-        </NavContainer>
-      </NavWrapper>
-    </div>
+    <HeaderWrapper>
+      <Hedaer>
+        {/* 마신사로고 : home버튼 */}
+        <a href="/">
+          {/* 로고이미지 : public 폴더에 넣은 후, 경로지정 */}
+          <Img src={`/images/masinsa-logo.png`} alt="masinsa-logo" />
+        </a>
+        {isLogin ? (
+          <BtnGroup>
+            <Btn>
+              <Icon>
+                <BsPersonHearts />
+              </Icon>
+              <P>MY PAGE</P>
+            </Btn>
+            <Btn onClick={() => naverLogout()}>
+              <Icon>
+                <MdLogout />
+              </Icon>
+              <P>LOGOUT</P>
+            </Btn>
+          </BtnGroup>
+        ) : (
+          <BtnGroup>
+            <Btn onClick={() => window.location.assign("/login/masinsa")}>
+              <Icon>
+                <MdLogin />
+              </Icon>
+              <P>LOGIN</P>
+            </Btn>
+          </BtnGroup>
+        )}
+      </Hedaer>
+    </HeaderWrapper>
   );
 }
 
@@ -73,16 +57,23 @@ export default Header;
 
 export const HeaderWrapper = styled.div`
   background: ${(props) => props.theme.style.lightGray};
+  margin: 0 auto;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+  @media (max-width: 320px) {
+    width: 320px;
+  }
 `;
 
 export const Hedaer = styled.div`
-  max-width: 1150px;
+  max-width: 1000px;
   height: 80px;
-  ${(props) => props.theme.variables.flex("", "space-between", "")};
-  padding: 0 10px;
+  ${(props) => props.theme.variables.flex("", "space-between", "center")};
+  padding-left: 10px;
   margin: 0px auto;
   @media (max-width: 768px) {
-    height: 70px;
+    height: 60px;
   }
 `;
 
@@ -95,7 +86,7 @@ export const Img = styled.img`
 `;
 
 export const BtnGroup = styled.div`
-  ${(props) => props.theme.variables.flex("", "space-around", "")};
+  ${(props) => props.theme.variables.flex("", "space-around", "center")};
   position: relative;
 `;
 
@@ -106,7 +97,7 @@ export const Icon = styled.div`
 export const Btn = styled.div`
   width: 80px;
   margin: 8px;
-  font-size: 14px;
+  font-size: ${(props) => props.theme.style.Medium};
   font-weight: 700;
   text-align: center;
   background: none;
@@ -114,11 +105,13 @@ export const Btn = styled.div`
   color: ${(props) => props.theme.style.text};
   transition: 0.3s ease;
   &:hover {
-    color: ${(props) => props.theme.style.textHover};
+    color: ${(props) => props.theme.style.masinsaColor};
   }
   &:active {
-    color: ${(props) => props.theme.style.textHover};
     text-decoration: underline;
+  }
+  @media (max-width: 768px) {
+    font-weight: 600;
   }
 `;
 
@@ -128,16 +121,4 @@ export const P = styled.p`
   @media (max-width: 768px) {
     display: none;
   }
-`;
-
-export const NavWrapper = styled.div`
-  height: 40px;
-  ${(props) => props.theme.variables.flex("", "center", "")};
-  margin: 0 auto;
-  background: ${(props) => props.theme.style.bg};
-`;
-
-export const NavContainer = styled.div`
-  width: 1200px;
-  ${(props) => props.theme.variables.flex("", "space-around", "")};
 `;
