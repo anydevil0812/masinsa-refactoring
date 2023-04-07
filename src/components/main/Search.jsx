@@ -3,15 +3,11 @@ import { getMainMask } from "../../api/mask/getMainMask";
 import { getSearchMaskSort } from "../../api/mask/getSearchMaskSort";
 import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
-import { Title } from "../../styles/Common";
 
 function Search({ setMaskList, setKeyWord, keyword }) {
   // 정렬변경을 위한 상수선언
   const [sortCol, setSortCol] = useState("");
   const [sortOrder, setSortOrder] = useState("");
-
-  // 마스크 리스트
-  // const [maskList, setMaskList] = useState([]);
 
   const [inputValue, setInputValue] = useState();
 
@@ -123,9 +119,7 @@ export const SelectBox = styled.select`
   position: absolute;
   top: 25%;
   right: -100px;
-  opacity: 1;
-  transition: 0.3s ease;
   @media (max-width: 768px) {
-    opacity: 0;
+    display: none;
   }
 `;

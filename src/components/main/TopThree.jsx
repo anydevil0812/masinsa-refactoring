@@ -65,9 +65,6 @@ export const Container = styled.div`
   padding-bottom: 10px;
   border-bottom: 2px solid ${(props) => props.theme.style.bg};
   transition: 0.5s ease;
-  @media (max-width: 768px) {
-    margin-top: 10px;
-  }
 `;
 
 export const Mask = styled.div`

@@ -14,7 +14,8 @@ export const Wrapper = styled.div`
 export const Title = styled.p`
   display: block;
   padding-bottom: 15px;
-  margin: 20px auto;
+  margin: 15px auto;
+  line-height: 15px;
   font-size: ${(props) => props.theme.style.textLarge};
   font-weight: 700;
   text-align: center;

@@ -1,31 +1,31 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import styled from "styled-components";
 
 function CurrentLocation({ mask }) {
   const { blockingindex } = useParams();
   return (
-    <div>
+    <Container>
       {mask ? (
         // about Page 에서는 mask에서 값가져오기
         <div>
           홈 → {mask.blockingIndex} → {mask.shape}
         </div>
       ) : (
-        // list Page 에서는 파라미터( blockingindex ) 가져오기
-        <>
-          {{ blockingindex } != ":blockingindex" ? (
-            <>
-              <div>홈 → {blockingindex}</div>
-            </>
-          ) : (
-            <>
-              <div>홈 → </div>
-            </>
-          )}
-        </>
+        <div>홈 → {blockingindex}</div>
       )}
-    </div>
+    </Container>
   );
 }
 
 export default CurrentLocation;
+
+const Container = styled.div`
+  padding: 10px;
+  font-size: ${(props) => props.theme.style.textSmall};
+  color: ${(props) => props.theme.style.textLightGray};
+  transition: 0.3s ease;
+  @media (max-width: 768px) {
+    font-size: ${(props) => props.theme.style.textXSmall};
+  }
+`;
