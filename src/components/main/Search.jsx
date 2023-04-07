@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from "react";
-import SearchMaskLists from "./SearchMaskLists";
 import { getMainMask } from "../../api/mask/getMainMask";
 import { getSearchMaskSort } from "../../api/mask/getSearchMaskSort";
 import styled from "styled-components";
-import { Title } from "../../styles/Common";
 import { FaSearch } from "react-icons/fa";
+import { Title } from "../../styles/Common";
 
-function Search() {
-  // 키워드 설정
-  const [keyword, setKeyWord] = useState("");
-
+function Search({ setMaskList, setKeyWord, keyword }) {
   // 정렬변경을 위한 상수선언
   const [sortCol, setSortCol] = useState("");
   const [sortOrder, setSortOrder] = useState("");
 
   // 마스크 리스트
-  const [maskList, setMaskList] = useState([]);
+  // const [maskList, setMaskList] = useState([]);
 
   const [inputValue, setInputValue] = useState();
 
@@ -54,41 +50,34 @@ function Search() {
   // 처음 페이지 렌더링 시 마스크 요청 : filterMaskSort 이용 ( getMainMask 로 하나 더 만듦)
   useEffect(() => {
     getMainMask({ sortCol, sortOrder, setMaskList, keyword });
-    // console.log(maskList);
-  }, [sortCol, sortOrder, keyword]);
+  }, [sortCol, sortOrder, keyword, setMaskList]);
 
   // 검색 시 마스크 요청
   useEffect(() => {
     getSearchMaskSort({ keyword, sortCol, sortOrder, setMaskList });
-  }, [sortCol, sortOrder, keyword]);
+  }, [sortCol, sortOrder, keyword, setMaskList]);
 
   return (
-    <>
-      <Title>ALL MASINSA MASK</Title>
-      {/* 검색창 */}
-      <Form>
-        <Input
-          type="search"
-          id="SearchBox"
-          placeholder="ex.중형, 마스크, KF94"
-          autoFocus
-          onChange={onChange}
-          onKeyPress={onKeyPress}
-        />
-        <Icon onClick={onAdd}>
-          <FaSearch />
-        </Icon>
-        {/* 정렬변경 */}
-        <SelectBox id="sortChange" onChange={sortValueChagne}>
-          <option value="">정렬기준</option>
-          <option value="price">낮은가격순</option>
-          <option value="avg_score">평점순</option>
-          <option value="click_num">클릭순</option>
-        </SelectBox>
-      </Form>
-      {/* 마스크리스트 부분*/}
-      {/* <SearchMaskLists maskList={maskList} keyword={keyword} /> */}
-    </>
+    <Form>
+      <Input
+        type="search"
+        id="SearchBox"
+        placeholder="ex.중형, 마스크, KF94"
+        autoFocus
+        onChange={onChange}
+        onKeyPress={onKeyPress}
+      />
+      <Icon onClick={onAdd}>
+        <FaSearch />
+      </Icon>
+      {/* 정렬변경 */}
+      <SelectBox id="sortChange" onChange={sortValueChagne}>
+        <option value="">정렬기준</option>
+        <option value="price">낮은가격순</option>
+        <option value="avg_score">평점순</option>
+        <option value="click_num">클릭순</option>
+      </SelectBox>
+    </Form>
   );
 }
 

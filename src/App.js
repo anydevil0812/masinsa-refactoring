@@ -12,7 +12,7 @@ import Nav from "./components/Nav";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState();
   return (
     <ThemeProvider theme={{ style: theme, variables }}>
       {/* context를 이용해 전역 상태관리 => 유저 로그인 정보 */}

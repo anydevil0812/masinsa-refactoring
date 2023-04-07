@@ -26,8 +26,6 @@ function MaskList({ user }) {
     }
   }, []);
 
-  // console.log(maskKF);
-
   const [maskSize, setMaskSize] = useState("");
   const [maskShape, setMaskShape] = useState("");
   const [sortCol, setSortCol] = useState("");
@@ -48,13 +46,8 @@ function MaskList({ user }) {
     });
   }, [sortCol, sortOrder, maskKF, maskSize, maskShape]);
 
-  // console.log("maskList : ", maskList);
-
   // 필터 버튼 상태가 변경되었는 지 확인을 위한 isChange
   const [isChange, setIsChange] = useState(false);
-  // console.log(isChange);
-
-  // console.log(userInfo);
 
   return (
     <div>

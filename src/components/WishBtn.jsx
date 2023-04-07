@@ -67,5 +67,4 @@ export default WishBtn;
 
 export const Icon = styled.div`
   color: pink;
-  font-size: 30px;
 `;

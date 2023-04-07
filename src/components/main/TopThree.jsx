@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { putClick } from "../../api/mask/putClick";
 import styled from "styled-components";
-import { Title } from "../../styles/Common";
+import { getTop3 } from "../../api/mask/getTop3";
 
-function TopThree({ topMask }) {
+function TopThree() {
+  const [topMask, setTopMask] = useState([]);
+
+  useEffect(() => {
+    getTop3({ setTopMask });
+  }, []);
+
   /* TOP3 상품 클릭 수 증가  */
   const [isClick, setIsClick] = useState(false);
   const [clickMaskId, setClickMaskId] = useState();
@@ -17,39 +23,36 @@ function TopThree({ topMask }) {
 
   return (
     <Container>
-      <Title>MASINSA AWARDS</Title>
-      <MaskList>
-        {topMask &&
-          topMask.map((top) => (
-            <a
-              href={`/about/${top.id}`}
-              onClick={() => {
-                setIsClick(true);
-                setClickMaskId(top.id);
-              }}
-              key={top.id}
+      {topMask &&
+        topMask.map((top) => (
+          <a
+            href={`/about/${top.id}`}
+            onClick={() => {
+              setIsClick(true);
+              setClickMaskId(top.id);
+            }}
+            key={top.id}
+          >
+            <Mask
+              // hover => show maskInfo
+              onMouseOver={() =>
+                (document.getElementById(`${top.id}info`).style.opacity = "1")
+              }
+              onMouseOut={() =>
+                (document.getElementById(`${top.id}info`).style.opacity = "0")
+              }
             >
-              <Mask
-                // hover => show maskInfo
-                onMouseOver={() =>
-                  (document.getElementById(`${top.id}info`).style.opacity = "1")
-                }
-                onMouseOut={() =>
-                  (document.getElementById(`${top.id}info`).style.opacity = "0")
-                }
-              >
-                <MaskImg src={top.thumbnail} />
-                {/* TOP3 상품 Hover 시 상품정보 표기 */}
-                <MaskInfo id={`${top.id}info`}>
-                  <P>{top.name}</P>
-                  <P>▪ {top.price} 원</P>
-                  <P>▪ size : {top.size}</P>
-                  <P>▪ score : ⭐ {top.avgScore}</P>
-                </MaskInfo>
-              </Mask>
-            </a>
-          ))}
-      </MaskList>
+              <MaskImg src={top.thumbnail} />
+              {/* TOP3 상품 Hover 시 상품정보 표기 */}
+              <MaskInfo id={`${top.id}info`}>
+                <P>{top.name}</P>
+                <P>▪ {top.price} 원</P>
+                <P>▪ size : {top.size}</P>
+                <P>▪ score : ⭐ {top.avgScore}</P>
+              </MaskInfo>
+            </Mask>
+          </a>
+        ))}
     </Container>
   );
 }
@@ -57,11 +60,6 @@ function TopThree({ topMask }) {
 export default TopThree;
 
 export const Container = styled.div`
-  width: 100%;
-  margin-top: 15px;
-`;
-
-export const MaskList = styled.div`
   width: 100%;
   ${(props) => props.theme.variables.flex("", "center", "")};
   padding-bottom: 10px;
