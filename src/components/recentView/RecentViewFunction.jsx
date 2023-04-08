@@ -17,15 +17,10 @@ export function RecentViewFunction({ mask }) {
       watchArr = JSON.parse(watchArr);
     }
 
-    // console.log(mask);
-
-    // concat은 Arr에만 가능 !
-    // console.log(Array.isArray(watchArr));
-
     // 중복 값 제거 ( 같은 상품은 한개니까 ..)
 
     // 만약 watchArr 에 아무것도 없다면 mask 객체 최초로 바로 저장
-    if (watchArr.length == 0) {
+    if (watchArr.length === 0) {
       // 현재 aboutPage의 mask 객체를 watchArr배열에 저장
       watchArr = watchArr.concat(mask);
     } else {
@@ -36,16 +31,13 @@ export function RecentViewFunction({ mask }) {
 
       // watchArr 길이만큼 반복하면서 같은 maskId가 있으면 count ++
       for (let i = 0; i < watchArr.length; i++) {
-        // console.log("watchArr[i]", watchArr[i].id);
-        // console.log("mask.id", mask.id);
-        // console.log("mask.id", watchArr[i].id != mask.id);
-        if (watchArr[i].id == mask.id) {
+        if (watchArr[i].id === mask.id) {
           count += 1;
         }
       }
 
       // 반복 검사 후, count = 0 이면 중복데이터(객체)가 없다는 뜻이므로 watchArr에 저장
-      if (count == 0) {
+      if (count === 0) {
         // console.log(count);
         watchArr = watchArr.concat(mask);
       }
@@ -58,9 +50,6 @@ export function RecentViewFunction({ mask }) {
 
     // 가장 최근의 상품의 제일 위로
     watchArr = watchArr.reverse();
-
-    // console.log("mask", mask);
-    // console.log("watchArr", watchArr);
 
     // localStorage에 watchArr(최근본상품) 데이터를 JSON 자료형으로 저장
     localStorage.setItem("watchedMask", JSON.stringify(watchArr));

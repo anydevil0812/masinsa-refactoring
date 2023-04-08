@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import RecentView from "./components/RecentView";
+import RecentView from "./components/recentView/RecentView";
 import UpBtn from "./components/UpBtn";
 import Header from "./components/Header";
 import { useState } from "react";

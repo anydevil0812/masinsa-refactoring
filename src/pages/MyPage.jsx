@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { getWishlist } from "../api/wishlist/getWishlist";
-import MyWishLists from "../components/personal/MyWishLists";
+import MyWishLists from "../components/myPage/MyWishLists";
 import { UserLoginContext } from "../context/UserLoginContext";
 import {
   MyPageArticle,

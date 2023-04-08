@@ -6,11 +6,11 @@ import Reviews from "../components/about/Reviews";
 import { useParams } from "react-router-dom";
 import { getMask } from "../api/mask/getMask";
 import { MainWrapper } from "../styles/OtherStyles";
-import CurrentLocation from "../components/productList/CurrentLocation";
+import CurrentLocation from "../components/maskList/CurrentLocation";
 import { CurrentFilterSection } from "../styles/OtherStyles";
 import { MaskAboutWrapper } from "../styles/AboutPageStyle";
 import { getImage } from "../api/getImage";
-import { RecentViewFunction } from "../components/RecentViewFunction";
+import { RecentViewFunction } from "../components/recentView/RecentViewFunction";
 import { getAnalysis } from "../api/analysis/getAnalysis";
 import ReviewBtn from "../components/about/ReviewBtn";
 

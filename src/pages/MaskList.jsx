@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import SortChange from "../components/productList/SortChange";
+import SortChange from "../components/maskList/SortChange";
 import MaskItem from "../components/MaskItem";
 import { useParams } from "react-router-dom";
 import { getFilterMaskSort } from "../api/mask/getFilterMaskSort";
 import { Wrapper } from "../styles/Common";
-import ShapeFilter from "../components/productList/ShapeFilter";
-import SizeFilter from "../components/productList/SizeFilter";
-import CurrentLocation from "../components/productList/CurrentLocation";
+import ShapeFilter from "../components/maskList/ShapeFilter";
+import SizeFilter from "../components/maskList/SizeFilter";
+import CurrentLocation from "../components/maskList/CurrentLocation";
 
 function MaskList() {
   // kf 파라미터 설정
