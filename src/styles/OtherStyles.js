@@ -19,21 +19,3 @@ export const CurrentFilterSection = styled.div`
   color: #868b8b;
   // border: 2px solid red;
 `;
-
-// 위로가기 버튼 : 고정 fixed
-export const GoUpBtn = styled.button`
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 40px;
-  padding: 10px;
-  background: #e5ffe9;
-  color: #05735f;
-  font-weight: 800;
-  border: 0px;
-  border-radius: 10%;
-  box-shadow: 2px 2px 5px #999;
-  &:active {
-    background: #b1f0e1;
-  }
-`;
