@@ -18,7 +18,7 @@ export default function NaverLogin() {
     const login = new naver.LoginWithNaverId({
       clientId: NAVER_CLIENT_ID,
       callbackUrl: NAVER_CALLBACK_URL,
-      loginButton: { color: "red", type: 3, height: 30 },
+      loginButton: { color: "red", type: 3, height: 50 },
     });
     // init 안하면 아이콘 안뜸!
     login.init();

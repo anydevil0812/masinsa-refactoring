@@ -1,15 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Nav() {
+  const navigate = useNavigate();
   return (
     <NavWrapper>
       <NavContainer>
-        <Btn onClick={() => window.location.assign("/maskList/KF94")}>KF94</Btn>
-        <Btn onClick={() => window.location.assign("/maskList/KF80")}>KF80</Btn>
-        <Btn onClick={() => window.location.assign("/maskList/OTHER")}>
-          OTHER
-        </Btn>
+        <Btn onClick={() => navigate("/maskList/KF94")}>KF94</Btn>
+        <Btn onClick={() => navigate("/maskList/KF80")}>KF80</Btn>
+        <Btn onClick={() => navigate("/maskList/OTHER")}>OTHER</Btn>
       </NavContainer>
     </NavWrapper>
   );

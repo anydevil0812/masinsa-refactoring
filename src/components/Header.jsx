@@ -3,10 +3,13 @@ import styled from "styled-components";
 import { UserLoginContext } from "../context/UserLoginContext";
 import { BsPersonHearts } from "react-icons/bs";
 import { MdLogout, MdLogin } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
-  const { isLogin } = useContext(UserLoginContext);
+  const navigate = useNavigate();
+  const { isLogin, userInfo } = useContext(UserLoginContext);
 
+  console.log(userInfo);
   // 로그아웃 => 세션쿠키, accessToken 삭제
   const naverLogout = () => {
     //user정보 삭제
@@ -19,13 +22,14 @@ function Header() {
     <HeaderWrapper>
       <Hedaer>
         {/* 마신사로고 : home버튼 */}
-        <a href="/">
-          {/* 로고이미지 : public 폴더에 넣은 후, 경로지정 */}
-          <Img src={`/images/masinsa-logo.png`} alt="masinsa-logo" />
-        </a>
+        <Img
+          src={`/images/masinsa-logo.png`}
+          alt="masinsa-logo"
+          onClick={() => navigate("/")}
+        />
         {isLogin ? (
           <BtnGroup>
-            <Btn>
+            <Btn onClick={() => navigate("/mypage")}>
               <Icon>
                 <BsPersonHearts />
               </Icon>

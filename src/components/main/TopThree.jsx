@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import { putClick } from "../../api/mask/putClick";
 import styled from "styled-components";
 import { getTop3 } from "../../api/mask/getTop3";
+import { useNavigate } from "react-router-dom";
 
 function TopThree() {
+  const navigate = useNavigate();
+
   const [topMask, setTopMask] = useState([]);
 
   useEffect(() => {
@@ -25,33 +28,30 @@ function TopThree() {
     <Container>
       {topMask &&
         topMask.map((top) => (
-          <a
-            href={`/about/${top.id}`}
+          <Mask
             onClick={() => {
               setIsClick(true);
               setClickMaskId(top.id);
+              navigate(`/about/${top.id}`);
             }}
             key={top.id}
+            // hover => show maskInfo
+            onMouseOver={() =>
+              (document.getElementById(`${top.id}info`).style.opacity = "1")
+            }
+            onMouseOut={() =>
+              (document.getElementById(`${top.id}info`).style.opacity = "0")
+            }
           >
-            <Mask
-              // hover => show maskInfo
-              onMouseOver={() =>
-                (document.getElementById(`${top.id}info`).style.opacity = "1")
-              }
-              onMouseOut={() =>
-                (document.getElementById(`${top.id}info`).style.opacity = "0")
-              }
-            >
-              <MaskImg src={top.thumbnail} />
-              {/* TOP3 상품 Hover 시 상품정보 표기 */}
-              <MaskInfo id={`${top.id}info`}>
-                <P>{top.name}</P>
-                <P>▪ {top.price} 원</P>
-                <P>▪ size : {top.size}</P>
-                <P>▪ score : ⭐ {top.avgScore}</P>
-              </MaskInfo>
-            </Mask>
-          </a>
+            <MaskImg src={top.thumbnail} />
+            {/* TOP3 상품 Hover 시 상품정보 표기 */}
+            <MaskInfo id={`${top.id}info`}>
+              <P>{top.name}</P>
+              <P>▪ {top.price} 원</P>
+              <P>▪ size : {top.size}</P>
+              <P>▪ score : ⭐ {top.avgScore}</P>
+            </MaskInfo>
+          </Mask>
         ))}
     </Container>
   );
@@ -68,7 +68,7 @@ export const Container = styled.div`
 `;
 
 export const Mask = styled.div`
-  max-width: 350px;
+  width: 350px;
   margin: 5px;
   border: 1px solid ${(props) => props.theme.style.bg};
   border-radius: 20px;

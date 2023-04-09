@@ -12,7 +12,7 @@ export default function Footer() {
 const FooterWrepper = styled.div`
   height: 80px;
   background: ${(props) => props.theme.style.lightGray};
-  margin: 0 auto;
+  margin-top: 30px;
   @media (max-width: 768px) {
     width: 100%;
   }

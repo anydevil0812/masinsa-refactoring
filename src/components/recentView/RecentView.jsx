@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { putClick } from "../../api/mask/putClick";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 export default function RecentView() {
   // localStorage에 저장된 최근본상품(watchedMask) 가져오기
@@ -21,22 +22,24 @@ export default function RecentView() {
     }
   });
 
+  const navigate = useNavigate();
+
   return (
     <Wrapper>
       <P>최근 본 상품</P>
       {userWatched &&
         userWatched.map((recentMask) => (
           <Container key={recentMask.id}>
-            <a
-              href={`/about/${recentMask.id}`}
+            <div
               key={recentMask.id}
               onClick={() => {
                 setIsClick(true);
                 setClickMaskId(recentMask.id);
+                navigate(`/about/${recentMask.id}`);
               }}
             >
               <Img src={recentMask.thumbnail} alt={recentMask.id} />
-            </a>
+            </div>
           </Container>
         ))}
     </Wrapper>
@@ -83,4 +86,5 @@ const Container = styled.div`
 const Img = styled.img`
   width: 100%;
   height: 100%;
+  cursor: pointer;
 `;

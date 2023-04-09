@@ -1,21 +1,25 @@
 import React from "react";
 import WishBtn from "./WishBtn";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 export default function MaskItem({ maskList }) {
+  const navigate = useNavigate();
   return (
     <Container>
       {maskList &&
         maskList.map((mask) => (
           <Wrapper key={mask.id}>
-            <Mask>
-              <a href={`/about/${mask.id}`}>
-                <Img src={mask.thumbnail} alt="mask thumbnail" />
-              </a>
+            <Mask onClick={() => navigate(`/about/${mask.id}`)}>
+              <Img src={mask.thumbnail} alt="mask thumbnail" />
             </Mask>
             <MaskInfo>
-              <Name href={`/about/${mask.id}`}>{mask.name}</Name>
-              <Price href={`/about/${mask.id}`}>{mask.price} 원</Price>
+              <Name onClick={() => navigate(`/about/${mask.id}`)}>
+                {mask.name}
+              </Name>
+              <Price onClick={() => navigate(`/about/${mask.id}`)}>
+                {mask.price} 원
+              </Price>
               <ul>
                 <Option>▪ {mask.blockingIndex}</Option>
                 <Option>▪ Size : {mask.size}</Option>
@@ -57,6 +61,7 @@ const Mask = styled.div`
   max-width: 180px;
   margin-right: 20px;
   border: 1px solid #d9d9d9;
+  cursor: pointer;
   @media (max-width: 768px) {
     margin: 0;
   }
@@ -75,22 +80,30 @@ const MaskInfo = styled.div`
   position: relative;
 `;
 
-const Name = styled.a`
+const Name = styled.div`
   margin-bottom: 5px;
   font-size: ${(props) => props.theme.style.textSmall};
   line-height: 1.5;
   font-weight: 600;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
   @media (max-width: 768px) {
     font-size: ${(props) => props.theme.style.textXSmall};
   }
 `;
 
-const Price = styled.a`
+const Price = styled.div`
   margin-bottom: 10px;
   font-size: ${(props) => props.theme.style.textMedium};
   line-height: 1.5;
   font-weight: 600;
   color: ${(props) => props.theme.style.highlight};
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
   @media (max-width: 768px) {
     font-size: ${(props) => props.theme.style.textXSmall};
   }
