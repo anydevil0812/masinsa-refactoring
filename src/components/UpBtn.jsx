@@ -43,4 +43,8 @@ const Icon = styled.div`
   &:hover {
     color: ${(props) => props.theme.style.masinsaColor};
   }
+  @media (max-width: 768px) {
+    font-size: 30px;
+    right: 20px;
+  }
 `;

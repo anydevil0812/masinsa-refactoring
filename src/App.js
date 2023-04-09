@@ -9,6 +9,7 @@ import GlobalStyle from "../src/styles/GlobalStyle";
 import theme from "../src/styles/theme";
 import variables from "../src/styles/variables";
 import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -23,6 +24,7 @@ function App() {
         <Header />
         <Nav />
         <Outlet />
+        <Footer />
         <RecentView />
         <UpBtn />
       </UserLoginContext.Provider>
