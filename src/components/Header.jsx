@@ -115,6 +115,7 @@ export const Btn = styled.div`
     text-decoration: underline;
   }
   @media (max-width: 768px) {
+    width: 40px;
     font-weight: 600;
   }
 `;

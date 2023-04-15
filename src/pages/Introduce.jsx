@@ -19,11 +19,11 @@ import {
   RightIntroDiv,
   VerticalHr,
 } from "../styles/IntroducePageStyle";
-import { MainWrapper } from "../styles/OtherStyles";
+import { Wrapper } from "../styles/Common";
 
 function Introduce() {
   return (
-    <MainWrapper>
+    <Wrapper>
       <div
         style={{
           width: "950px",
@@ -133,7 +133,7 @@ function Introduce() {
           </GoListBtnDiv>
         </div>
       </div>
-    </MainWrapper>
+    </Wrapper>
   );
 }
 

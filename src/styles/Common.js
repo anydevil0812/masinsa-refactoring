@@ -7,9 +7,6 @@ export const Wrapper = styled.div`
   @media (max-width: 768px) {
     width: 100%;
   }
-  @media (max-width: 320px) {
-    width: 320px;
-  }
 `;
 
 export const Title = styled.p`

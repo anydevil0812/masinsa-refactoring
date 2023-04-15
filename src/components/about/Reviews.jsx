@@ -64,7 +64,7 @@ function Reviews({ maskId, mask, memberId }) {
   // console.log("maskId: ", maskId);
 
   return (
-    <div>
+    <div name="review">
       <hr></hr>
       <i>상세리뷰</i>
       <hr></hr>

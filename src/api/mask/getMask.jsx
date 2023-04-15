@@ -15,6 +15,6 @@ export const getMask = async ({ maskId, setMask }) => {
       }
     });
 
-  console.log("getMask : ", response.data);
+  // console.log("getMask : ", response.data);
   setMask(response.data.result);
 };

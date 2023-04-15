@@ -8,7 +8,7 @@ import {
   MyPageWrapper,
   MyWishMasks,
 } from "../styles/MyPageStyle";
-import { MainWrapper } from "../styles/OtherStyles";
+import { Wrapper } from "../styles/Common";
 
 function MyPage() {
   const { userInfo } = useContext(UserLoginContext);
@@ -25,20 +25,17 @@ function MyPage() {
   }, [memberId]);
 
   return (
-    <MainWrapper>
+    <Wrapper>
       {userInfo && (
         <MyPageWrapper>
-          <div style={{ margin: "60px 0px 30px" }}>
+          <div>
             <h3>"안녕하세요"</h3>
             <h2>
-              <span style={{ fontSize: "30px", color: "#05735F" }}>
-                {nickname}
-              </span>
-              님 🙂
+              <span>{nickname}</span>님 🙂
             </h2>
           </div>
           {/* 찜목록 section*/}
-          <div style={{ padding: "20px 50px" }}>
+          <div>
             {/* 찜목록 box */}
             <MyPageBox>
               {/* My WishList (제목) 보여주는 부분 */}
@@ -48,58 +45,17 @@ function MyPage() {
               </MyPageArticle>
               {/* 찜 목록 부분 */}
               <MyWishMasks>
-                {wishList.length > 0 ? (
+                {wishList && (
                   <>
                     <MyWishLists wishList={wishList} memberId={userInfo.id} />
                   </>
-                ) : (
-                  // 찜목록이 없을 경우
-                  <div
-                    style={{
-                      padding: "50px",
-                    }}
-                  >
-                    <p
-                      style={{
-                        fontSize: "12px",
-                        fontWeight: "600",
-                      }}
-                    >
-                      찜한 상품이 존재하지 않습니다
-                    </p>
-                    <p
-                      style={{
-                        fontSize: "12px",
-                        color: "#0ea654",
-                        fontWeight: "600",
-                      }}
-                    >
-                      * 믿을 수 있는 MASINSA의 마스크들을 만나러 가볼까요? *
-                    </p>
-                    <p
-                      style={{
-                        fontSize: "12px",
-                        fontWeight: "600",
-                      }}
-                    >
-                      👉{" "}
-                      <a
-                        href="/"
-                        style={{
-                          fontSize: "10px",
-                        }}
-                      >
-                        MainPage로 돌아가기
-                      </a>
-                    </p>
-                  </div>
                 )}
               </MyWishMasks>
             </MyPageBox>
           </div>
         </MyPageWrapper>
       )}
-    </MainWrapper>
+    </Wrapper>
   );
 }
 
