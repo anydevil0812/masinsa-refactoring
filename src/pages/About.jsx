@@ -84,7 +84,7 @@ function About() {
           ) : (
             <Reviews mask={mask} maskId={maskId} memberId={user.id} />
           )}
-          {/* 최근 본 상품 관련 메서드 실행  - sungmin 수정사항 */}
+          {/* 최근 본 상품 관련 메서드 실행 */}
           <RecentViewFunction mask={mask} />
         </Wrapper>
       )}

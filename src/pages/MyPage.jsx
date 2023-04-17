@@ -17,7 +17,8 @@ function MyPage() {
 
   // 닉네임 ! (없으면 고객)
   const nickname = userInfo ? userInfo.nickname : "고객";
-  const memberId = userInfo.id;
+  // Optional Chaining => 사용자정보가 있다면 id값 설정
+  const memberId = userInfo?.id;
   const [wishList, setWishList] = useState([]);
 
   useEffect(() => {

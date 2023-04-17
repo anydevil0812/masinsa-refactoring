@@ -10,25 +10,49 @@ import theme from "../src/styles/theme";
 import variables from "../src/styles/variables";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
+import { useEffect } from "react";
+import { getUserInfo } from "./api/getUserInfo";
+import { getCookie } from "./cookie";
+import { CookiesProvider } from "react-cookie";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUserInfo] = useState();
+
+  // 새로고침 시, 쿠키에서 accessToken이 존재하는 지 확인
+  // => 존재한다면 로그인 상태이므로 사용자정보 재요청
+  useEffect(() => {
+    const accessToken = getCookie("accessToken");
+    // console.log("App", accessToken);
+    if (accessToken) {
+      getUserInfo({ accessToken, setUserInfo });
+    }
+  }, []);
+
+  // console.log(userInfo);
+
   return (
-    <ThemeProvider theme={{ style: theme, variables }}>
-      {/* context를 이용해 전역 상태관리 => 유저 로그인 정보 */}
-      <UserLoginContext.Provider
-        value={{ setIsLogin, isLogin, setUserInfo, userInfo }}
-      >
-        <GlobalStyle />
-        <Header />
-        <Nav />
-        <Outlet />
-        <Footer />
-        <RecentView />
-        <UpBtn />
-      </UserLoginContext.Provider>
-    </ThemeProvider>
+    <CookiesProvider>
+      <ThemeProvider theme={{ style: theme, variables }}>
+        {/* context를 이용해 전역 상태관리 => 유저 로그인 정보 */}
+        <UserLoginContext.Provider
+          value={{
+            setIsLogin,
+            isLogin,
+            setUserInfo,
+            userInfo,
+          }}
+        >
+          <GlobalStyle />
+          <Header />
+          <Nav />
+          <Outlet />
+          <Footer />
+          <RecentView />
+          <UpBtn />
+        </UserLoginContext.Provider>
+      </ThemeProvider>
+    </CookiesProvider>
   );
 }
 

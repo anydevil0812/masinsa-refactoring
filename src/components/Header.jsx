@@ -4,16 +4,17 @@ import { UserLoginContext } from "../context/UserLoginContext";
 import { BsPersonHearts } from "react-icons/bs";
 import { MdLogout, MdLogin } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { removeCookie } from "../cookie";
 
 function Header() {
   const navigate = useNavigate();
-  const { isLogin, userInfo } = useContext(UserLoginContext);
+  const { userInfo } = useContext(UserLoginContext);
+  // console.log("Header", userInfo);
 
-  console.log(userInfo);
   // 로그아웃 => 세션쿠키, accessToken 삭제
   const naverLogout = () => {
     //user정보 삭제
-    sessionStorage.removeItem("acessToken");
+    removeCookie("accessToken");
     // main 페이지로 이동
     window.location.href = "/";
   };
@@ -27,7 +28,7 @@ function Header() {
           alt="masinsa-logo"
           onClick={() => navigate("/")}
         />
-        {isLogin ? (
+        {userInfo ? (
           <BtnGroup>
             <Btn onClick={() => navigate("/mypage")}>
               <Icon>

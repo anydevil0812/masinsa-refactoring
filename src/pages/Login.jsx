@@ -7,18 +7,14 @@ import { Wrapper } from "../styles/Common";
 
 export default function Login() {
   const navigate = useNavigate();
+  const { userInfo } = useContext(UserLoginContext);
 
-  const { isLogin } = useContext(UserLoginContext);
-
-  const goMain = () => {
-    if (isLogin) {
-      navigate("/", { state: isLogin });
-    }
-  };
-
+  // 만약, 로그인 된 사용자가 접근 시에 main으로 navigate
   useEffect(() => {
-    goMain();
-  }, [isLogin]);
+    if (userInfo) {
+      navigate("/");
+    }
+  }, [userInfo]);
 
   return (
     <Wrapper>
