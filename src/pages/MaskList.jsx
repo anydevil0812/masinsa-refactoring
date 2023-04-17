@@ -22,7 +22,7 @@ function MaskList() {
       const kf = blockingindex.slice(-2, blockingindex.length);
       setMaskKF(kf);
     }
-  }, []);
+  }, [blockingindex]);
 
   const [sortCol, setSortCol] = useState("");
   const [sortOrder, setSortOrder] = useState("");

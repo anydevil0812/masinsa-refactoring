@@ -4,6 +4,7 @@ export const Wrapper = styled.div`
   max-width: 1000px;
   min-height: 70vh;
   margin: 0 auto;
+  padding: 0 10px;
   @media (max-width: 768px) {
     width: 100%;
   }
