@@ -29,17 +29,15 @@ export default function RecentView() {
       <P>최근 본 상품</P>
       {userWatched &&
         userWatched.map((recentMask) => (
-          <Container key={recentMask.id}>
-            <div
-              key={recentMask.id}
-              onClick={() => {
-                setIsClick(true);
-                setClickMaskId(recentMask.id);
-                navigate(`/about/${recentMask.id}`);
-              }}
-            >
-              <Img src={recentMask.thumbnail} alt={recentMask.id} />
-            </div>
+          <Container
+            key={recentMask.id}
+            onClick={() => {
+              setIsClick(true);
+              setClickMaskId(recentMask.id);
+              navigate(`/about/${recentMask.id}`);
+            }}
+          >
+            <Img src={recentMask.thumbnail} alt={recentMask.id} />
           </Container>
         ))}
     </Wrapper>
@@ -63,7 +61,7 @@ const Wrapper = styled.div`
   visibility: visible;
   opacity: 1;
   transition: 0.5s ease;
-  @media (max-width: 1024px) {
+  @media (max-width: 768px) {
     visibility: hidden;
     opacity: 0;
   }

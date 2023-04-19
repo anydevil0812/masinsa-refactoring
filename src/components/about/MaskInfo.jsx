@@ -52,7 +52,7 @@ const Container = styled.section`
 `;
 
 const Thumnail = styled.div`
-  max-width: 350px;
+  max-width: 335px;
   @media (max-width: 768px) {
     max-width: 300px;
   }

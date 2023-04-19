@@ -25,6 +25,7 @@ function App() {
     const accessToken = getCookie("accessToken");
     // console.log("App", accessToken);
     if (accessToken) {
+      // console.log("hi");
       getUserInfo({ accessToken, setUserInfo });
     }
   }, []);

@@ -1,63 +1,87 @@
+import styled from "styled-components";
 import React, { useContext, useEffect, useState } from "react";
-import { getWishlist } from "../api/wishlist/getWishlist";
-import MyWishLists from "../components/myPage/MyWishLists";
 import { UserLoginContext } from "../context/UserLoginContext";
-import {
-  MyPageArticle,
-  MyPageBox,
-  MyPageWrapper,
-  MyWishMasks,
-} from "../styles/MyPageStyle";
+import { getWishlist } from "../api/wishlist/getWishlist";
+import WishList from "../components/myPage/WishList";
 import { Wrapper } from "../styles/Common";
+import { RiSurgicalMaskLine } from "react-icons/ri";
+import RecentViewMobile from "../components/recentView/RecentViewMobile";
 
 function MyPage() {
   const { userInfo } = useContext(UserLoginContext);
-
-  console.log("유저", userInfo);
 
   // 닉네임 ! (없으면 고객)
   const nickname = userInfo ? userInfo.nickname : "고객";
   // Optional Chaining => 사용자정보가 있다면 id값 설정
   const memberId = userInfo?.id;
-  const [wishList, setWishList] = useState([]);
+  const [wishList, setWishList] = useState();
 
   useEffect(() => {
     getWishlist(memberId, setWishList);
   }, [memberId]);
 
   return (
-    <Wrapper>
+    <>
       {userInfo && (
-        <MyPageWrapper>
-          <div>
-            <h3>"안녕하세요"</h3>
-            <h2>
-              <span>{nickname}</span>님 🙂
-            </h2>
-          </div>
-          {/* 찜목록 section*/}
-          <div>
-            {/* 찜목록 box */}
-            <MyPageBox>
-              {/* My WishList (제목) 보여주는 부분 */}
-              <MyPageArticle>
-                <span style={{ color: "red" }}>❤</span> My WishList{" "}
-                <span style={{ color: "red" }}>❤</span>
-              </MyPageArticle>
-              {/* 찜 목록 부분 */}
-              <MyWishMasks>
-                {wishList && (
-                  <>
-                    <MyWishLists wishList={wishList} memberId={userInfo.id} />
-                  </>
-                )}
-              </MyWishMasks>
-            </MyPageBox>
-          </div>
-        </MyPageWrapper>
+        <Wrapper>
+          <Top>
+            <P>
+              안녕하세요
+              <Icon>
+                <RiSurgicalMaskLine />
+              </Icon>
+            </P>
+            <P>
+              <Color>" {nickname} " </Color> 님
+            </P>
+          </Top>
+          {/* 찜목록 */}
+          <WishList wishList={wishList} memberId={userInfo.id} />
+          {/*  */}
+          <RecentViewMobile />
+        </Wrapper>
       )}
-    </Wrapper>
+    </>
   );
 }
 
 export default MyPage;
+
+const Top = styled.div`
+  width: 100%;
+  ${(props) => props.theme.variables.flex("column", "", "center")};
+  margin: 20px 0 10px;
+  padding: 20px 0;
+  font-size: ${(props) => props.theme.style.textLarge};
+  font-weight: 600;
+  transition: 0.3s ease;
+  @media (max-width: 768px) {
+    font-size: ${(props) => props.theme.style.textMedium};
+  }
+`;
+
+const P = styled.p`
+  line-height: 1.3;
+  margin-bottom: 5px;
+  position: relative;
+`;
+
+const Icon = styled.span`
+  font-size: 25px;
+  font-weight: 500;
+  position: absolute;
+  top: -2%;
+  right: -30%;
+  transition: 0.3s ease;
+  @media (max-width: 768px) {
+    font-size: ${(props) => props.theme.style.textLarge};
+  }
+`;
+
+const Color = styled.span`
+  color: ${(props) => props.theme.style.masinsaColor};
+  font-size: 24px;
+  @media (max-width: 768px) {
+    font-size: ${(props) => props.theme.style.textLarge};
+  }
+`;
