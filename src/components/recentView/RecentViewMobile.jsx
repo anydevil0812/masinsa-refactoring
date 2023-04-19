@@ -3,6 +3,8 @@ import { putClick } from "../../api/mask/putClick";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { IoIosBrowsers } from "react-icons/io";
+import { ContainerTitle } from "../../styles/Common";
+import { MdSearchOff } from "react-icons/md";
 
 // 768px 이하의 경우 => mypage에서 보여줌
 export default function RecentViewMobile() {
@@ -27,17 +29,17 @@ export default function RecentViewMobile() {
 
   return (
     <RecentContainer>
-      <Title>
+      <ContainerTitle>
         최근 본 상품
         <Icon>
           <IoIosBrowsers />
         </Icon>
-      </Title>
-      <Div>
-        {userWatched &&
-          userWatched.map((recentMask) => (
+      </ContainerTitle>
+      {/* <Div> */}
+      {userWatched ? (
+        userWatched.map((recentMask) => (
+          <Div key={recentMask.id}>
             <Mask
-              key={recentMask.id}
               onClick={() => {
                 setIsClick(true);
                 setClickMaskId(recentMask.id);
@@ -46,8 +48,17 @@ export default function RecentViewMobile() {
             >
               <Img src={recentMask.thumbnail} alt={recentMask.id} />
             </Mask>
-          ))}
-      </Div>
+          </Div>
+        ))
+      ) : (
+        <None>
+          <EyeIcon>
+            <MdSearchOff />
+          </EyeIcon>
+          최근 본 상품이 없습니다.
+        </None>
+      )}
+      {/* </Div> */}
     </RecentContainer>
   );
 }
@@ -62,25 +73,6 @@ const RecentContainer = styled.div`
     ${(props) => props.theme.variables.flex("column", "flex-start", "center")};
     display: block;
     margin-bottom: 15px;
-    font-size: ${(props) => props.theme.style.textSmall};
-  }
-`;
-
-const Title = styled.div`
-  width: 100.5%;
-  height: 50px;
-  ${(props) => props.theme.variables.flex("", "", "center")};
-  margin-bottom: 18px;
-  padding: 13px 15px;
-  border-radius: 15px 15px 0px 0px;
-  background: ${(props) => props.theme.style.masinsaColor};
-  font-size: ${(props) => props.theme.style.textMedium};
-  font-weight: 600;
-  color: ${(props) => props.theme.style.white};
-  transition: 0.3s ease;
-  @media (max-width: 768px) {
-    margin-bottom: 15px;
-    height: 40px;
     font-size: ${(props) => props.theme.style.textSmall};
   }
 `;
@@ -101,7 +93,6 @@ const Div = styled.div`
 
 const Mask = styled.div`
   width: 100%;
-  margin: 0 10px;
   position: relative;
 `;
 
@@ -110,4 +101,18 @@ const Img = styled.img`
   height: 100%;
   border-radius: 10px;
   cursor: pointer;
+`;
+
+const None = styled.div`
+  width: 100%;
+  height: 110px;
+  ${(props) => props.theme.variables.flex("column", "center", "center")};
+  font-size: ${(props) => props.theme.style.textSmall};
+  font-weight: 600;
+  color: ${(props) => props.theme.style.textLightGray};
+`;
+
+const EyeIcon = styled.div`
+  font-size: 24px;
+  margin-bottom: 5px;
 `;

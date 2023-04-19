@@ -1,16 +1,16 @@
+import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import MaskInfo from "../components/about/MaskInfo";
 import Analysis from "../components/about/Analysis";
 import MaskDetail from "../components/about/MaskDetail";
 import Reviews from "../components/about/Reviews";
-import CurrentLocation from "../components/maskList/CurrentLocation";
+import CurrentLocation from "../components/CurrentLocation";
 import { useParams } from "react-router-dom";
 import { getMask } from "../api/mask/getMask";
 import { getImage } from "../api/getImage";
 import { RecentViewFunction } from "../components/recentView/RecentViewFunction";
 import { getAnalysis } from "../api/analysis/getAnalysis";
 import { Wrapper } from "../styles/Common";
-import styled from "styled-components";
 import GoReviewBtn from "../components/about/GoReviewBtn";
 
 function About() {

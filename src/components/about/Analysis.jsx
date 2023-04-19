@@ -1,4 +1,5 @@
-import React from "react";
+import styled from "styled-components";
+import React, { useState } from "react";
 import "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { Chart } from "chart.js";
@@ -9,9 +10,7 @@ import {
   SizeBarChart,
 } from "./AnalysisCharts";
 import GoReviewBtn from "./GoReviewBtn";
-import styled from "styled-components";
 import { BsQuestionCircle } from "react-icons/bs";
-import { useState } from "react";
 
 Chart.register(ChartDataLabels);
 

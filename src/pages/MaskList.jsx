@@ -6,7 +6,7 @@ import { getFilterMaskSort } from "../api/mask/getFilterMaskSort";
 import { Wrapper } from "../styles/Common";
 import ShapeFilter from "../components/maskList/ShapeFilter";
 import SizeFilter from "../components/maskList/SizeFilter";
-import CurrentLocation from "../components/maskList/CurrentLocation";
+import CurrentLocation from "../components/CurrentLocation";
 
 function MaskList() {
   // kf 파라미터 설정

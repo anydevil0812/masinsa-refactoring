@@ -5,6 +5,7 @@ import { putWishlist } from "../../api/wishlist/putWishlist";
 import { BsBagHeartFill } from "react-icons/bs";
 import { MdDeleteForever } from "react-icons/md";
 import { TbMoodCry } from "react-icons/tb";
+import { ContainerTitle } from "../../styles/Common";
 
 export default function WishList({ wishList, memberId }) {
   const navigate = useNavigate();
@@ -26,12 +27,13 @@ export default function WishList({ wishList, memberId }) {
 
   return (
     <WishContainer>
-      <Title>
+      <ContainerTitle>
         My WishList
         <Icon>
           <BsBagHeartFill />
         </Icon>
-      </Title>
+      </ContainerTitle>
+
       {wishList?.length ? (
         <WishMaskList>
           {wishList.map((wish) => (
@@ -74,25 +76,6 @@ const WishContainer = styled.div`
   margin: 0 auto;
   @media (max-width: 768px) {
     height: 400px;
-  }
-`;
-
-const Title = styled.div`
-  width: 100.5%;
-  height: 55px;
-  ${(props) => props.theme.variables.flex("", "", "center")};
-  margin-bottom: 18px;
-  padding: 13px 15px;
-  border-radius: 15px 15px 0px 0px;
-  background: ${(props) => props.theme.style.masinsaColor};
-  font-size: ${(props) => props.theme.style.textLarge};
-  font-weight: 600;
-  color: ${(props) => props.theme.style.white};
-  transition: 0.3s ease;
-  @media (max-width: 768px) {
-    margin-bottom: 15px;
-    height: 50px;
-    font-size: ${(props) => props.theme.style.textMedium};
   }
 `;
 
