@@ -17,10 +17,10 @@ const Btn = styled.button`
   height: 30px;
   background: none;
   border: 0px;
-  font-size: ${(props) => props.theme.style.textXSmall};
+  font-size: ${(props) => props.theme.style.textSmall};
   text-decoration: underline;
   cursor: pointer;
-  margin-bottom: 5px;
+  margin: 10px 0;
   transition: 0.3s ease;
   &:hover {
     color: ${(props) => props.theme.style.masinsaColor};

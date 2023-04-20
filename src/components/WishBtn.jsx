@@ -4,6 +4,7 @@ import { putWishlist } from "../api/wishlist/putWishlist";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import styled from "styled-components";
 import { UserLoginContext } from "../context/UserLoginContext";
+import Modal from "./Modal";
 
 function WishBtn({ maskId }) {
   const { userInfo } = useContext(UserLoginContext);
@@ -13,6 +14,10 @@ function WishBtn({ maskId }) {
   const [memberId, setMemberId] = useState("");
   // 찜여부 확인 ( 이미 찜했던 거 deletion : Y 인 경우)
   const [isWish, setIsWish] = useState("N");
+  // 모달
+  const [open, setOpen] = useState(false);
+  // 모달상태
+  const [status, setStatus] = useState();
 
   useEffect(() => {
     if (userInfo) {
@@ -27,21 +32,21 @@ function WishBtn({ maskId }) {
         postWishlist(memberId, maskId, isWish, setIsWish);
       }
     }
-  }, [isClick]);
+  }, [isClick, memberId, maskId, isWish]);
 
   useEffect(() => {
     if (memberId !== "") {
-      if (isWish == null) {
+      if (isWish === null) {
         putWishlist(memberId, maskId);
       }
     }
-  }, [isWish]);
+  }, [isWish, memberId, maskId]);
 
   return (
     <>
+      {open && <Modal setOpen={setOpen} status={status} />}
       {userInfo ? (
         <Icon
-          // login 되어 있을 경우 =>  wish 추가
           onClick={() => {
             setIsClick(!isClick);
           }}
@@ -50,11 +55,9 @@ function WishBtn({ maskId }) {
         </Icon>
       ) : (
         <Icon
-          // login 안되어 있을 경우 => 로그인 안내 alert
           onClick={() => {
-            alert(
-              "로그인이 필요한 서비스 입니다. 로그인 후, 이용부탁드립니다."
-            );
+            setStatus("로그인이 필요한 서비스입니다.");
+            setOpen(true);
           }}
         >
           <AiOutlineHeart />

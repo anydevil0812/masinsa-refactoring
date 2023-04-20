@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
   }
 `;
 
+// Main Page 사용
 export const Title = styled.p`
   display: block;
   padding-bottom: 15px;
@@ -27,6 +28,20 @@ export const Title = styled.p`
   }
 `;
 
+// About Page 사용
+export const AboutTitle = styled.p`
+  width: 100%;
+  font-size: ${(props) => props.theme.style.textMedium};
+  font-weight: 600;
+  text-align: center;
+  display: block;
+  margin-top: 10px;
+  padding: 10px 0;
+  border-top: 1px solid ${(props) => props.theme.style.textLightGray};
+  border-bottom: 1px solid ${(props) => props.theme.style.textLightGray}; ;
+`;
+
+// Mypage Page 사용
 export const ContainerTitle = styled.div`
   width: 100.5%;
   height: 50px;

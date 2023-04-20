@@ -176,10 +176,10 @@ const P = styled.p`
 const Div = styled.div`
   width: 100%;
   height: 100%;
+  ${(props) => props.theme.variables.flex("column", "center", "center")};
   font-size: ${(props) => props.theme.style.textMedium};
   font-weight: 600;
   color: ${(props) => props.theme.style.textLightGray};
-  ${(props) => props.theme.variables.flex("column", "center", "center")};
   @media (max-width: 768px) {
     font-size: ${(props) => props.theme.style.textSmall};
   }

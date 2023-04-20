@@ -11,6 +11,7 @@ import {
 } from "./AnalysisCharts";
 import GoReviewBtn from "./GoReviewBtn";
 import { BsQuestionCircle } from "react-icons/bs";
+import { AboutTitle } from "../../styles/Common";
 
 Chart.register(ChartDataLabels);
 
@@ -32,7 +33,7 @@ function Analysis({ analysisinfo }) {
   return (
     <Container>
       {/* 마스크 리뷰가 10,000개이상이면 통계출력 => 10,000개 이상이 아나리면 analysisInfo가 undefined  */}
-      <Title>Analysis for this Mask</Title>
+      <AboutTitle>Analysis for this Mask</AboutTitle>
       <Content>
         <ScoreContainer>
           <ScoreTitle>MASINSA SCORE</ScoreTitle>
@@ -66,20 +67,8 @@ export default Analysis;
 
 const Container = styled.div`
   ${(props) => props.theme.variables.flex("column", "", "center")};
-  border-top: 1px solid ${(props) => props.theme.style.textLightGray};
   border-bottom: 1px solid ${(props) => props.theme.style.textLightGray};
   margin-top: 20px;
-`;
-
-const Title = styled.p`
-  width: 100%;
-  font-size: ${(props) => props.theme.style.textMedium};
-  font-weight: 600;
-  text-align: center;
-  display: block;
-  margin-top: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid ${(props) => props.theme.style.textLightGray}; ;
 `;
 
 const Content = styled.div`
@@ -117,6 +106,7 @@ const ScoreTitle = styled.p`
   margin-bottom: 15px;
   @media (max-width: 768px) {
     width: auto;
+    font-size: ${(props) => props.theme.style.textLarge};
   }
 `;
 
@@ -129,6 +119,9 @@ const Score = styled.span`
   font-size: 40px;
   color: ${(props) => props.theme.style.masinsaColor};
   margin-right: 5px;
+  @media (max-width: 768px) {
+    font-size: 35px;
+  }
 `;
 
 const Icon = styled.div`

@@ -37,9 +37,10 @@ export default function RecentViewMobile() {
       </ContainerTitle>
       {/* <Div> */}
       {userWatched ? (
-        userWatched.map((recentMask) => (
-          <Div key={recentMask.id}>
+        <Div>
+          {userWatched.map((recentMask) => (
             <Mask
+              key={recentMask.id}
               onClick={() => {
                 setIsClick(true);
                 setClickMaskId(recentMask.id);
@@ -48,8 +49,8 @@ export default function RecentViewMobile() {
             >
               <Img src={recentMask.thumbnail} alt={recentMask.id} />
             </Mask>
-          </Div>
-        ))
+          ))}
+        </Div>
       ) : (
         <None>
           <EyeIcon>
@@ -58,7 +59,6 @@ export default function RecentViewMobile() {
           최근 본 상품이 없습니다.
         </None>
       )}
-      {/* </Div> */}
     </RecentContainer>
   );
 }

@@ -72,7 +72,7 @@ const SelectBox = styled.div`
   border: 1px solid #9a9a9a;
   cursor: pointer;
   color: ${(props) => (props.isClick ? props.theme.style.white : "#05735f")};
-  background-color: ${(props) => (props.isClick ? "#05735f" : "white")};
+  background-color: ${(props) => (props.isClick ? "#05735f" : "transparent")};
   transition: 0.3s ease;
   @media (max-width: 768px) {
     font-size: ${(props) => props.theme.style.textXSmall};

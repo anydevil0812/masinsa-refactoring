@@ -1,12 +1,6 @@
 import axios from "axios";
 
-export const postMemberReview = async ({
-  memberId,
-  maskId,
-  content,
-  reviewType,
-  // setMemberReview,
-}) => {
+export const postMemberReview = async ({ memberId, maskId, content }) => {
   await axios.post(
     "http://35.216.122.45:8080/member_review",
 
@@ -15,7 +9,7 @@ export const postMemberReview = async ({
 
       maskId: maskId,
       content: content,
-      reviewType: reviewType,
+      reviewType: "member",
     }
   );
 
