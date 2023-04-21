@@ -10,7 +10,6 @@ function Main() {
   const [maskList, setMaskList] = useState([]);
   // 키워드 설정
   const [keyword, setKeyWord] = useState("");
-
   return (
     <Wrapper>
       {/* masinsa awards */}

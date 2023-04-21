@@ -1,6 +1,6 @@
+import styled from "styled-components";
 import React, { useContext } from "react";
 import WishBtn from "./WishBtn";
-import styled from "styled-components";
 import { UserLoginContext } from "../context/UserLoginContext";
 
 export default function MaskItem({ maskList }) {

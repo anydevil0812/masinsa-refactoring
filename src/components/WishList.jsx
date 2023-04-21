@@ -13,7 +13,6 @@ export default function WishList({ wishList, memberId }) {
   const setUpWish = (maskId) => {
     setIsClickSetUp(true);
     setMaskId(maskId);
-    // console.log(maskId);
   };
 
   useEffect(() => {
@@ -31,7 +30,6 @@ export default function WishList({ wishList, memberId }) {
           <BsBagHeartFill />
         </Icon>
       </ContainerTitle>
-
       {wishList?.length ? (
         <WishMaskList>
           {wishList.map((wish) => (

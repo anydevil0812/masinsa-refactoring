@@ -1,5 +1,5 @@
-import React from "react";
 import styled from "styled-components";
+import React from "react";
 
 export default function Modal({ setOpen, status }) {
   return (
@@ -72,7 +72,7 @@ const P = styled.p`
 
 const Btn = styled.button`
   width: 65px;
-  height: 25px;
+  height: 30px;
   margin: 15px 10px 0;
   background: ${(props) => props.theme.style.masinsaColor};
   border: 0;

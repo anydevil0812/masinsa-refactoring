@@ -1,15 +1,13 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import React from "react";
 
 export default function Nav() {
-  const navigate = useNavigate();
   return (
     <NavWrapper>
       <NavContainer>
-        <Btn onClick={() => navigate("/maskList/KF94")}>KF94</Btn>
-        <Btn onClick={() => navigate("/maskList/KF80")}>KF80</Btn>
-        <Btn onClick={() => navigate("/maskList/OTHER")}>OTHER</Btn>
+        <Link href="/maskList/KF94">KF94</Link>
+        <Link href="/maskList/KF80">KF80</Link>
+        <Link href="/maskList/OTHER">OTHER</Link>
       </NavContainer>
     </NavWrapper>
   );
@@ -41,7 +39,8 @@ export const NavContainer = styled.div`
   }
 `;
 
-export const Btn = styled.div`
+export const Link = styled.a`
+  display: block;
   width: 80px;
   font-size: ${(props) => props.theme.style.textMedium};
   font-weight: 600;

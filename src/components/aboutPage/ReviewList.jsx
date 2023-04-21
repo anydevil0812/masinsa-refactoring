@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import React, { useState, useEffect, useContext } from "react";
-import ReviewItem from "./ReviewItem";
-import Pagination from "./Pagination";
 import { AboutTitle } from "../../styles/Common";
 import { UserLoginContext } from "../../context/UserLoginContext";
+import { getReview, getReviewCount, postMemberReview } from "../../api/review";
+import ReviewItem from "./ReviewItem";
+import Pagination from "./Pagination";
 import Modal from "../Modal";
 import { BsPencilSquare } from "react-icons/bs";
-import { getReview, getReviewCount, postMemberReview } from "../../api/review";
 
 export default function ReviewList({ maskId, mask }) {
   const { userInfo } = useContext(UserLoginContext);

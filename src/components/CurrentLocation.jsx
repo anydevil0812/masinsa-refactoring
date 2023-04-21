@@ -1,6 +1,6 @@
+import styled from "styled-components";
 import React from "react";
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
 
 function CurrentLocation({ mask }) {
   const { blockingindex } = useParams();

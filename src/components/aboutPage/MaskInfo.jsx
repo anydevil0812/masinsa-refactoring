@@ -1,6 +1,6 @@
+import styled from "styled-components";
 import React from "react";
 import WishBtn from "../WishBtn";
-import styled from "styled-components";
 
 function MaskInfo({ mask }) {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));

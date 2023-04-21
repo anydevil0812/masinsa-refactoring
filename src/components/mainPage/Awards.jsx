@@ -1,11 +1,8 @@
 import styled from "styled-components";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { getAwards, putClick } from "../../api/mask";
 
 export default function Awards() {
-  const navigate = useNavigate();
-
   const [topMask, setTopMask] = useState([]);
 
   useEffect(() => {
@@ -31,7 +28,6 @@ export default function Awards() {
             onClick={() => {
               setIsClick(true);
               setClickMaskId(top.id);
-              navigate(`/about/${top.id}`);
             }}
             key={top.id}
             // hover => show maskInfo
@@ -42,14 +38,16 @@ export default function Awards() {
               (document.getElementById(`${top.id}info`).style.opacity = "0")
             }
           >
-            <MaskImg src={top.thumbnail} />
-            {/* TOP3 상품 Hover 시 상품정보 표기 */}
-            <MaskInfo id={`${top.id}info`}>
-              <P>{top.name}</P>
-              <P>▪ {top.price} 원</P>
-              <P>▪ size : {top.size}</P>
-              <P>▪ score : ⭐ {top.avgScore}</P>
-            </MaskInfo>
+            <a href={`/about/${top.id}`}>
+              <MaskImg src={top.thumbnail} />
+              {/* TOP3 상품 Hover 시 상품정보 표기 */}
+              <MaskInfo id={`${top.id}info`}>
+                <P>{top.name}</P>
+                <P>▪ {top.price} 원</P>
+                <P>▪ size : {top.size}</P>
+                <P>▪ score : ⭐ {top.avgScore}</P>
+              </MaskInfo>
+            </a>
           </Mask>
         ))}
     </Container>

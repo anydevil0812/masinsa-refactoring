@@ -1,6 +1,6 @@
+import styled from "styled-components";
 import React, { useState } from "react";
 import { BsArrowUpCircle } from "react-icons/bs";
-import styled from "styled-components";
 
 export default function UpBtn() {
   const [btnStatus, setBtnStatus] = useState(false);
@@ -12,8 +12,6 @@ export default function UpBtn() {
       setBtnStatus(false);
     }
   };
-
-  // console.log(btnStatus);
 
   // 스크롤 위치 확인
   window.addEventListener("scroll", handleShow);

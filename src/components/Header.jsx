@@ -1,13 +1,11 @@
-import React, { useContext } from "react";
 import styled from "styled-components";
+import React, { useContext } from "react";
 import { UserLoginContext } from "../context/UserLoginContext";
 import { BsPersonHearts } from "react-icons/bs";
 import { MdLogout, MdLogin } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
 import { removeCookie } from "../cookie";
 
 function Header() {
-  const navigate = useNavigate();
   const { userInfo } = useContext(UserLoginContext);
   // console.log("Header", userInfo);
 
@@ -27,29 +25,29 @@ function Header() {
           <Img src={`/images/masinsa-logo.png`} alt="masinsa-logo" />
         </a>
         {userInfo ? (
-          <BtnGroup>
-            <Btn onClick={() => navigate("/mypage")}>
+          <Group>
+            <Link href="/mypage">
               <Icon>
                 <BsPersonHearts />
               </Icon>
               <P>MY PAGE</P>
-            </Btn>
-            <Btn onClick={() => naverLogout()}>
+            </Link>
+            <Link onClick={() => naverLogout()} href="/">
               <Icon>
                 <MdLogout />
               </Icon>
               <P>LOGOUT</P>
-            </Btn>
-          </BtnGroup>
+            </Link>
+          </Group>
         ) : (
-          <BtnGroup>
-            <Btn onClick={() => window.location.assign("/login/masinsa")}>
+          <Group>
+            <Link href="/login/masinsa">
               <Icon>
                 <MdLogin />
               </Icon>
               <P>LOGIN</P>
-            </Btn>
-          </BtnGroup>
+            </Link>
+          </Group>
         )}
       </Hedaer>
     </HeaderWrapper>
@@ -58,7 +56,7 @@ function Header() {
 
 export default Header;
 
-export const HeaderWrapper = styled.div`
+const HeaderWrapper = styled.div`
   background: ${(props) => props.theme.style.lightGray};
   margin: 0 auto;
   @media (max-width: 768px) {
@@ -69,7 +67,7 @@ export const HeaderWrapper = styled.div`
   }
 `;
 
-export const Hedaer = styled.div`
+const Hedaer = styled.div`
   max-width: 1000px;
   height: 80px;
   ${(props) => props.theme.variables.flex("", "space-between", "center")};
@@ -80,7 +78,7 @@ export const Hedaer = styled.div`
   }
 `;
 
-export const Img = styled.img`
+const Img = styled.img`
   width: 200px;
   transition: 0.5s ease;
   @media (max-width: 768px) {
@@ -88,16 +86,17 @@ export const Img = styled.img`
   }
 `;
 
-export const BtnGroup = styled.div`
+const Group = styled.div`
   ${(props) => props.theme.variables.flex("", "space-around", "center")};
   position: relative;
 `;
 
-export const Icon = styled.div`
+const Icon = styled.div`
   font-size: 25px;
 `;
 
-export const Btn = styled.div`
+const Link = styled.a`
+  display: block;
   width: 80px;
   margin: 8px;
   font-size: ${(props) => props.theme.style.Medium};
@@ -119,7 +118,7 @@ export const Btn = styled.div`
   }
 `;
 
-export const P = styled.p`
+const P = styled.p`
   margin: 0px;
   display: block;
   @media (max-width: 768px) {

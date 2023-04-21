@@ -30,8 +30,9 @@ export const postWishlist = async (memberId, maskId, isWish, setIsWish) => {
       }
     })
     .then((response) => {
-      setIsWish(null);
-      console.log(response.data);
+      if (response.data.message === "이미 찜 되어있는 마스크입니다.") {
+        setIsWish(true);
+      }
     });
 
   return response;

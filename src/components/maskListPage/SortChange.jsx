@@ -1,6 +1,5 @@
-import React from "react";
-import { useState } from "react";
 import styled from "styled-components";
+import React, { useState } from "react";
 
 export default function SortChange({ setSortCol, setSortOrder }) {
   const [isClick, setIsClick] = useState({

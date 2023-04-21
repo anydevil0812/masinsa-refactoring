@@ -9,11 +9,11 @@ import WishList from "../components/WishList";
 
 function MyPage() {
   const { userInfo } = useContext(UserLoginContext);
-
   // 닉네임 ! (없으면 고객)
   const nickname = userInfo ? userInfo.nickname : "고객";
   // Optional Chaining => 사용자정보가 있다면 id값 설정
   const memberId = userInfo?.id;
+  // 찜목록
   const [wishList, setWishList] = useState();
 
   useEffect(() => {
@@ -37,7 +37,7 @@ function MyPage() {
           </Top>
           {/* 찜목록 */}
           <WishList wishList={wishList} memberId={userInfo.id} />
-          {/*  */}
+          {/* 최근본상품_mobile */}
           <RecentViewMobile />
         </Wrapper>
       )}
