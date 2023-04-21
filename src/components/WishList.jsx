@@ -1,14 +1,12 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { putWishlist } from "../../api/wishlist/putWishlist";
 import { BsBagHeartFill } from "react-icons/bs";
 import { MdDeleteForever } from "react-icons/md";
 import { TbMoodCry } from "react-icons/tb";
-import { ContainerTitle } from "../../styles/Common";
+import { ContainerTitle } from "../styles/Common";
+import { putWishlist } from "../api/wishlist";
 
 export default function WishList({ wishList, memberId }) {
-  const navigate = useNavigate();
   const [isClickSetUup, setIsClickSetUp] = useState(false);
   const [maskId, setMaskId] = useState(0);
 
@@ -38,7 +36,7 @@ export default function WishList({ wishList, memberId }) {
         <WishMaskList>
           {wishList.map((wish) => (
             <MaskContainer key={wish.id}>
-              <Mask onClick={() => navigate(`/about/${wish.maskId}`)}>
+              <Mask href={`/about/${wish.maskId}`}>
                 <Img src={wish.thumbnail} alt={wish.maskName} />
                 <Info>
                   <P>{wish.maskName}</P>
@@ -109,7 +107,8 @@ const MaskContainer = styled.div`
   width: 100%;
 `;
 
-const Mask = styled.div`
+const Mask = styled.a`
+  display: block;
   position: relative;
   @media (max-width: 426px) {
     height: 190px;

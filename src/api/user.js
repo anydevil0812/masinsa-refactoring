@@ -1,8 +1,9 @@
 import axios from "axios";
 
+// 사용자 정보
 export const getUserInfo = async ({ accessToken, setUserInfo }) => {
   axios
-    .post(`http://35.216.122.45:8080/member/new-member`, {
+    .post(`${process.env.REACT_APP_BASE_URL}/member/new-member`, {
       token: accessToken,
     })
     .then((response) => {

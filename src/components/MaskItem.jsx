@@ -1,25 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import WishBtn from "./WishBtn";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { UserLoginContext } from "../context/UserLoginContext";
 
 export default function MaskItem({ maskList }) {
-  const navigate = useNavigate();
+  const { wishList } = useContext(UserLoginContext);
+  // console.log(wishList);
+
   return (
     <Container>
       {maskList &&
         maskList.map((mask) => (
           <Wrapper key={mask.id}>
-            <Mask onClick={() => navigate(`/about/${mask.id}`)}>
+            <Mask href={`/about/${mask.id}`}>
               <Img src={mask.thumbnail} alt="mask thumbnail" />
             </Mask>
             <MaskInfo>
-              <Name onClick={() => navigate(`/about/${mask.id}`)}>
-                {mask.name}
-              </Name>
-              <Price onClick={() => navigate(`/about/${mask.id}`)}>
-                {mask.price} 원
-              </Price>
+              <Name href={`/about/${mask.id}`}>{mask.name}</Name>
+              <Price href={`/about/${mask.id}`}>{mask.price} 원</Price>
               <ul>
                 <Option>▪ {mask.blockingIndex}</Option>
                 <Option>▪ Size : {mask.size}</Option>
@@ -56,7 +54,8 @@ const Wrapper = styled.div`
   }
 `;
 
-const Mask = styled.div`
+const Mask = styled.a`
+  display: block;
   max-width: 180px;
   margin-right: 20px;
   border: 1px solid #d9d9d9;
@@ -79,7 +78,8 @@ const MaskInfo = styled.div`
   position: relative;
 `;
 
-const Name = styled.div`
+const Name = styled.a`
+  display: block;
   margin-bottom: 5px;
   font-size: ${(props) => props.theme.style.textSmall};
   line-height: 1.5;
@@ -93,7 +93,8 @@ const Name = styled.div`
   }
 `;
 
-const Price = styled.div`
+const Price = styled.a`
+  display: block;
   margin-bottom: 10px;
   font-size: ${(props) => props.theme.style.textMedium};
   line-height: 1.5;

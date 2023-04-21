@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
-import { UserLoginContext } from "../../context/UserLoginContext";
-import { getCookie, setCookie } from "../../cookie";
-import { getUserInfo } from "../../api/getUserInfo";
+import { UserLoginContext } from "../context/UserLoginContext";
+import { getCookie, setCookie } from "../cookie";
+import { getUserInfo } from "../api/user";
 
 export default function NaverLogin() {
   // naver client

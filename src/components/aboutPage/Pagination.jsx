@@ -24,7 +24,7 @@ export default function Pagination({
   }
 
   // console.log("총 페이지 수: ", parseInt(reviewCount / 10) + 1);
-  console.log(currentPage);
+  // console.log(currentPage);
   // console.log("pageListOnce: ", pageListOnce.length);
 
   return (

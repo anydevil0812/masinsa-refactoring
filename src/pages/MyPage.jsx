@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import React, { useContext, useEffect, useState } from "react";
 import { UserLoginContext } from "../context/UserLoginContext";
-import { getWishlist } from "../api/wishlist/getWishlist";
-import WishList from "../components/myPage/WishList";
 import { Wrapper } from "../styles/Common";
 import { RiSurgicalMaskLine } from "react-icons/ri";
 import RecentViewMobile from "../components/recentView/RecentViewMobile";
+import { getWishlist } from "../api/wishlist";
+import WishList from "../components/WishList";
 
 function MyPage() {
   const { userInfo } = useContext(UserLoginContext);

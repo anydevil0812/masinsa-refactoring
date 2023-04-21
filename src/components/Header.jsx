@@ -23,11 +23,9 @@ function Header() {
     <HeaderWrapper>
       <Hedaer>
         {/* 마신사로고 : home버튼 */}
-        <Img
-          src={`/images/masinsa-logo.png`}
-          alt="masinsa-logo"
-          onClick={() => navigate("/")}
-        />
+        <a href="/">
+          <Img src={`/images/masinsa-logo.png`} alt="masinsa-logo" />
+        </a>
         {userInfo ? (
           <BtnGroup>
             <Btn onClick={() => navigate("/mypage")}>

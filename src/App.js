@@ -11,26 +11,31 @@ import variables from "../src/styles/variables";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import { useEffect } from "react";
-import { getUserInfo } from "./api/getUserInfo";
 import { getCookie } from "./cookie";
 import { CookiesProvider } from "react-cookie";
+import { getWishlist } from "./api/wishlist";
+import { getUserInfo } from "./api/user";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUserInfo] = useState();
+  const [wishList, setWishList] = useState();
 
   // 새로고침 시, 쿠키에서 accessToken이 존재하는 지 확인
   // => 존재한다면 로그인 상태이므로 사용자정보 재요청
   useEffect(() => {
     const accessToken = getCookie("accessToken");
-    // console.log("App", accessToken);
     if (accessToken) {
-      // console.log("hi");
       getUserInfo({ accessToken, setUserInfo });
     }
   }, []);
 
-  // console.log(userInfo);
+  useEffect(() => {
+    if (userInfo) {
+      const memberId = userInfo.id;
+      getWishlist(memberId, setWishList);
+    }
+  }, [userInfo]);
 
   return (
     <CookiesProvider>
@@ -42,6 +47,8 @@ function App() {
             isLogin,
             setUserInfo,
             userInfo,
+            wishList,
+            setWishList,
           }}
         >
           <GlobalStyle />

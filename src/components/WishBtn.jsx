@@ -1,17 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
-import { postWishlist } from "../api/wishlist/postWishlist";
-import { putWishlist } from "../api/wishlist/putWishlist";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import styled from "styled-components";
+import React, { useContext, useEffect, useState } from "react";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { UserLoginContext } from "../context/UserLoginContext";
 import Modal from "./Modal";
+import { postWishlist, putWishlist } from "../api/wishlist";
 
 function WishBtn({ maskId }) {
   const { userInfo } = useContext(UserLoginContext);
   // 찜버튼 클릭확인
   const [isClick, setIsClick] = useState(false);
   // 사용자 Id
-  const [memberId, setMemberId] = useState("");
+  const memberId = userInfo?.id;
   // 찜여부 확인 ( 이미 찜했던 거 deletion : Y 인 경우)
   const [isWish, setIsWish] = useState("N");
   // 모달
@@ -20,27 +19,21 @@ function WishBtn({ maskId }) {
   const [status, setStatus] = useState();
 
   useEffect(() => {
-    if (userInfo) {
-      setMemberId(userInfo.id);
-    }
-  }, []);
-
-  useEffect(() => {
     if (isClick) {
       if (memberId !== "") {
         // 찜post
         postWishlist(memberId, maskId, isWish, setIsWish);
       }
     }
-  }, [isClick, memberId, maskId, isWish]);
+  }, [isClick]);
 
   useEffect(() => {
     if (memberId !== "") {
-      if (isWish === null) {
+      if (isWish == null) {
         putWishlist(memberId, maskId);
       }
     }
-  }, [isWish, memberId, maskId]);
+  }, [isWish]);
 
   return (
     <>

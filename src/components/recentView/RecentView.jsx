@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { putClick } from "../../api/mask/putClick";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { putClick } from "../../api/mask";
 
 export default function RecentView() {
   // localStorage에 저장된 최근본상품(watchedMask) 가져오기
@@ -22,8 +21,6 @@ export default function RecentView() {
     }
   });
 
-  const navigate = useNavigate();
-
   return (
     <Wrapper>
       <P>최근 본 상품</P>
@@ -34,10 +31,11 @@ export default function RecentView() {
             onClick={() => {
               setIsClick(true);
               setClickMaskId(recentMask.id);
-              navigate(`/about/${recentMask.id}`);
             }}
           >
-            <Img src={recentMask.thumbnail} alt={recentMask.id} />
+            <a href={`/about/${recentMask.id}`}>
+              <Img src={recentMask.thumbnail} alt={recentMask.id} />
+            </a>
           </Container>
         ))}
     </Wrapper>

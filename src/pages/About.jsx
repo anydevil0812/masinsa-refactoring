@@ -1,17 +1,15 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
-import MaskInfo from "../components/about/MaskInfo";
-import Analysis from "../components/about/Analysis";
-import MaskDetail from "../components/about/MaskDetail";
-import ReviewList from "../components/about/ReviewList";
-import CurrentLocation from "../components/CurrentLocation";
 import { useParams } from "react-router-dom";
-import { getMask } from "../api/mask/getMask";
-import { getImage } from "../api/getImage";
-import { RecentViewFunction } from "../components/recentView/RecentViewFunction";
-import { getAnalysis } from "../api/analysis/getAnalysis";
 import { Wrapper } from "../styles/Common";
-import GoReviewBtn from "../components/about/GoReviewBtn";
+import { getAnalysis, getImage, getMask } from "../api/mask";
+import { RecentViewFunction } from "../components/recentView/RecentViewFunction";
+import CurrentLocation from "../components/CurrentLocation";
+import MaskInfo from "../components/aboutPage/MaskInfo";
+import Analysis from "../components/aboutPage/Analysis";
+import MaskDetail from "../components/aboutPage/MaskDetail";
+import ReviewList from "../components/aboutPage/ReviewList";
+import GoReviewBtn from "../components/aboutPage/GoReviewBtn";
 
 function About() {
   // 파라미터를 통한 maskId 전달

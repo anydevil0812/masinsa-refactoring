@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { getMainMask } from "../../api/mask/getMainMask";
-import { getSearchMaskSort } from "../../api/mask/getSearchMaskSort";
 import styled from "styled-components";
+import React, { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
+import { getSearchMask } from "../../api/mask";
 
 function Search({ setMaskList, setKeyWord, keyword }) {
-  // 정렬변경을 위한 상수선언
-  const [sortCol, setSortCol] = useState("");
-  const [sortOrder, setSortOrder] = useState("");
+  const [params, setParams] = useState({
+    keyword: "",
+  });
 
   const [inputValue, setInputValue] = useState();
 
@@ -16,42 +15,52 @@ function Search({ setMaskList, setKeyWord, keyword }) {
   };
 
   const onAdd = () => {
+    document.getElementById("sortChange").options.selectedIndex = 0;
     setKeyWord(inputValue);
   };
 
   // 엔터키 눌렸을 때도 keyword에 값 전달 => 새로고침 안되게 하기
   const onKeyPress = (e) => {
     if (e.key === "Enter") {
+      document.getElementById("sortChange").options.selectedIndex = 0;
       setKeyWord(inputValue);
       e.preventDefault();
+      setParams({
+        keyword: inputValue,
+      });
     }
   };
 
   const sortValueChagne = (e) => {
+    console.log(e.target.value);
     if (e.target.value === "price") {
-      setSortCol("price");
-      setSortOrder("asc");
+      setParams({
+        keyword: keyword,
+        sortCol: "price",
+        order: "asc",
+      });
     } else if (e.target.value === "avg_score") {
-      setSortCol("avg_score");
-      setSortOrder("desc");
+      setParams({
+        keyword: keyword,
+        sortCol: "avg_score",
+        order: "desc",
+      });
     } else if (e.target.value === "click_num") {
-      setSortCol("click_num");
-      setSortOrder("desc");
+      setParams({
+        keyword: keyword,
+        sortCol: "click_num",
+        order: "desc",
+      });
     } else {
-      setSortCol("");
-      setSortOrder("");
+      setParams({
+        keyword: keyword,
+      });
     }
   };
 
-  // 처음 페이지 렌더링 시 마스크 요청 : filterMaskSort 이용 ( getMainMask 로 하나 더 만듦)
   useEffect(() => {
-    getMainMask({ sortCol, sortOrder, setMaskList, keyword });
-  }, [sortCol, sortOrder, keyword, setMaskList]);
-
-  // 검색 시 마스크 요청
-  useEffect(() => {
-    getSearchMaskSort({ keyword, sortCol, sortOrder, setMaskList });
-  }, [sortCol, sortOrder, keyword, setMaskList]);
+    getSearchMask({ params, setMaskList });
+  }, [params, setMaskList]);
 
   return (
     <Form>

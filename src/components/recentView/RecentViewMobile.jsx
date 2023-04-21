@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { putClick } from "../../api/mask/putClick";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import { IoIosBrowsers } from "react-icons/io";
+import React, { useEffect, useState } from "react";
 import { ContainerTitle } from "../../styles/Common";
+import { putClick } from "../../api/mask";
+import { IoIosBrowsers } from "react-icons/io";
 import { MdSearchOff } from "react-icons/md";
 
 // 768px 이하의 경우 => mypage에서 보여줌
@@ -25,8 +24,6 @@ export default function RecentViewMobile() {
     }
   });
 
-  const navigate = useNavigate();
-
   return (
     <RecentContainer>
       <ContainerTitle>
@@ -44,10 +41,12 @@ export default function RecentViewMobile() {
               onClick={() => {
                 setIsClick(true);
                 setClickMaskId(recentMask.id);
-                navigate(`/about/${recentMask.id}`);
+                // navigate(`/about/${recentMask.id}`);
               }}
             >
-              <Img src={recentMask.thumbnail} alt={recentMask.id} />
+              <a href={`/about/${recentMask.id}`}>
+                <Img src={recentMask.thumbnail} alt={recentMask.id} />
+              </a>
             </Mask>
           ))}
         </Div>

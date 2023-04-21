@@ -1,10 +1,9 @@
-import React from "react";
-import TopThree from "../components/main/TopThree";
-import Search from "../components/main/Search";
-import { Title, Wrapper } from "../styles/Common";
-import { useState } from "react";
-import MaskItem from "../components/MaskItem";
 import styled from "styled-components";
+import React, { useState } from "react";
+import { Title, Wrapper } from "../styles/Common";
+import Awards from "../components/mainPage/Awards";
+import Search from "../components/mainPage/Search";
+import MaskItem from "../components/MaskItem";
 
 function Main() {
   // 마스크 리스트
@@ -16,7 +15,7 @@ function Main() {
     <Wrapper>
       {/* masinsa awards */}
       <Title>MASINSA AWARDS</Title>
-      <TopThree />
+      <Awards />
       <Title>ALL MASINSA MASK</Title>
       {/* 검색창 */}
       <Search

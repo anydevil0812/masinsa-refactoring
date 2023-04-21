@@ -1,14 +1,12 @@
 import styled from "styled-components";
 import React, { useState, useEffect, useContext } from "react";
-import { getReviews } from "../../api/review/getReviews";
-import { getReviewCount } from "../../api/review/getReviewCount";
 import ReviewItem from "./ReviewItem";
 import Pagination from "./Pagination";
 import { AboutTitle } from "../../styles/Common";
 import { UserLoginContext } from "../../context/UserLoginContext";
 import Modal from "../Modal";
-import { postMemberReview } from "../../api/review/postMemberReview";
 import { BsPencilSquare } from "react-icons/bs";
+import { getReview, getReviewCount, postMemberReview } from "../../api/review";
 
 export default function ReviewList({ maskId, mask }) {
   const { userInfo } = useContext(UserLoginContext);
@@ -42,7 +40,7 @@ export default function ReviewList({ maskId, mask }) {
 
   // 리뷰 요청
   useEffect(() => {
-    getReviews({ maskId, currentPage, size, reviewType, setReviews });
+    getReview({ maskId, currentPage, size, reviewType, setReviews });
   }, [maskId, currentPage, reviewType]);
 
   useEffect(() => {

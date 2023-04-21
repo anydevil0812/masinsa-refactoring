@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { putClick } from "../../api/mask/putClick";
 import styled from "styled-components";
-import { getTop3 } from "../../api/mask/getTop3";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { getAwards, putClick } from "../../api/mask";
 
-function TopThree() {
+export default function Awards() {
   const navigate = useNavigate();
 
   const [topMask, setTopMask] = useState([]);
 
   useEffect(() => {
-    getTop3({ setTopMask });
+    getAwards({ setTopMask });
   }, []);
 
   /* TOP3 상품 클릭 수 증가  */
@@ -56,8 +55,6 @@ function TopThree() {
     </Container>
   );
 }
-
-export default TopThree;
 
 export const Container = styled.div`
   width: 100%;

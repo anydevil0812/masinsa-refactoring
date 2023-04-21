@@ -1,9 +1,9 @@
+import styled from "styled-components";
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router";
-import NaverLogin from "../components/login/NaverLogin";
 import { UserLoginContext } from "../context/UserLoginContext";
-import styled from "styled-components";
 import { Wrapper } from "../styles/Common";
+import NaverLogin from "../components/NaverLogin";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ export default function Login() {
     if (userInfo) {
       navigate("/");
     }
-  }, [userInfo]);
+  }, [userInfo, navigate]);
 
   return (
     <Wrapper>
