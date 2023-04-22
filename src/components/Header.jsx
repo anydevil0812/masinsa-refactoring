@@ -7,15 +7,16 @@ import { removeCookie } from "../cookie";
 
 function Header() {
   const { userInfo } = useContext(UserLoginContext);
-  // console.log("Header", userInfo);
 
   // 로그아웃 => 세션쿠키, accessToken 삭제
-  const naverLogout = () => {
+  const handleLogout = () => {
     //user정보 삭제
     removeCookie("accessToken");
     // main 페이지로 이동
     window.location.href = "/";
   };
+
+  console.log(userInfo);
 
   return (
     <HeaderWrapper>
@@ -32,7 +33,7 @@ function Header() {
               </Icon>
               <P>MY PAGE</P>
             </Link>
-            <Link onClick={() => naverLogout()} href="/">
+            <Link onClick={() => handleLogout()}>
               <Icon>
                 <MdLogout />
               </Icon>

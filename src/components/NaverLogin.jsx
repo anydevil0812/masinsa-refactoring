@@ -26,7 +26,8 @@ export default function NaverLogin() {
         // 세션 쿠키 설정 : react-cookie
         setCookie("accessToken", login.accessToken.accessToken, {
           path: "/",
-          SameSite: "Secure",
+          secure: true,
+          sameSite: "none",
         });
         // 로컬스토리지에 저장된 유저 토큰 삭제 => 보안 ..
         localStorage.removeItem("com.naver.nid.access_token");

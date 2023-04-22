@@ -18,11 +18,11 @@ import { getUserInfo } from "./api/user";
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUserInfo] = useState();
-  const accessToken = getCookie("accessToken");
 
   // 새로고침 시, 쿠키에서 accessToken이 존재하는 지 확인
   // => 존재한다면 로그인 상태이므로 사용자정보 재요청
   useEffect(() => {
+    const accessToken = getCookie("accessToken");
     if (accessToken) {
       getUserInfo({ accessToken, setUserInfo });
     }
@@ -38,8 +38,6 @@ function App() {
             isLogin,
             setUserInfo,
             userInfo,
-            // wishList,
-            // setWishList,
           }}
         >
           <GlobalStyle />
