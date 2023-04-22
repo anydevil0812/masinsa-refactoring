@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.masinsa.mapper.ReviewMapper">
+	<insert id="addMemberReview" parameterType="com.spring.masinsa.dto.ReviewDTO" useGeneratedKeys="true" keyProperty="id">
+		<if test="score != null">
+			INSERT INTO review (mask_id, member_id, score, content, review_type) 
+			SELECT ${maskId}, ${memberId}, ${score}, '${content}', '${reviewType}' FROM DUAL
+			WHERE NOT EXISTS (SELECT review_id FROM review 
+			WHERE mask_id=${maskId} AND member_id=${memberId});
+		</if>
+		<if test="score == null">
+			INSERT INTO review (mask_id, member_id, content, review_type) 
+			SELECT ${maskId}, ${memberId}, '${content}', '${reviewType}' FROM DUAL
+			WHERE NOT EXISTS (SELECT review_id FROM review 
+			WHERE mask_id=${maskId} AND member_id=${memberId});
+		</if>
+	</insert>
+	
+	<update id="updateMemberReview">
+		UPDATE review SET score=${score}, content=${content} WHERE review_id=${reviewId} 
+	</update>
+	
+	<select id="getMemberReview" parameterType="Long" resultMap="getMemberReviewInfo">
+		SELECT * FROM review WHERE review_id = ${reviewId} 
+	</select>
+	
+	<resultMap id="getMemberReviewInfo" type="Review">
+		<id column="review_id" property="id" />
+		<result column="naver_id" property="naverId" />
+		<result column="score" property="score" />
+		<result column="mask_option" property="option" />
+		<result column="content" property="content" />
+		<result column="review_type" property="reviewType" />
+		<collection property="mask" javaType="Mask">
+			<id column="mask_id" property="id" />
+		</collection>
+		<collection property="member" javaType="Member"> 
+			<id column="member_id" property="id" />
+		</collection>
+ 	</resultMap>
+</mapper>

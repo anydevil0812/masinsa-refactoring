@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.masinsa.mapper.MaskMapper">
+  
+  <select id="getAllImages" resultMap="getAllImagesOb">
+    SELECT * FROM image WHERE mask_id = ${maskId};
+  </select>
+
+  <resultMap id="getAllImagesOb" type="Image">
+  	<id column="image_id" property="id" />
+  	<result column="image_url" property="imageUrl" />
+  	<result column="image_type" property="imageType" />
+  	<collection property="mask" ofType="Mask">
+  		<id column="mask_id" property="id" />
+  	</collection>
+ </resultMap>
+ 
+  <select id="getAllMask" resultMap="getAllMaskInfo">
+    SELECT * FROM mask WHERE 1=1
+   	<if test="blockingIndex != null">
+   		AND blocking_index LIKE '%${blockingIndex}%'
+   	</if>
+   	<if test="size != null">
+   		AND size LIKE '%${size}%'
+   	</if>
+   	<if test="shape != null">
+   		 AND shape LIKE '%${shape}%'
+   	</if>
+  </select>
+
+  <select id="getSortedMasks" resultMap="getAllMaskInfo">
+    SELECT * FROM mask ORDER BY ${standard} ASC;
+  </select>
+  
+	<!-- 예시 : SELECT * FROM mask 
+	WHERE size = "대형" AND shape = "새부리형" 
+	ORDER BY price desc limit 2 offset 0; -->
+	<select id="FilterSortMaskByPage" resultMap="getAllMaskInfo">
+		SELECT * FROM mask WHERE 1=1
+		<if test="filterCol1 != null and filter1 != null">
+			AND ${filterCol1} LIKE '%${filter1}%'
+		</if>
+		<if test="filterCol2 != null and filter2 != null">
+			AND ${filterCol2} LIKE '%${filter2}%'
+		</if>
+		<if test="filterCol3 != null and filter3 != null">
+			AND ${filterCol3} LIKE '%${filter3}%'
+		</if>
+		<if test="sortCol != null and order != null">
+			ORDER BY ${sortCol} ${order}
+		</if>
+		<if test="limit != null">
+			LIMIT ${limit}
+			<if test="offset != null">
+				OFFSET ${offset}
+			</if>
+		</if>
+	</select>
+
+	<!-- SearchSortMask 예시 :
+		SELECT * FROM mask
+		WHERE mask_name LIKE '%검색어%'
+		ORDER BY price desc limit 2 offset 0; -->
+	<select id="SearchSortMask" resultMap="getAllMaskInfo">
+		SELECT DISTINCT * FROM mask
+		<!-- if searchWord1, searchWord2, searchWord3 is not null, select distinct by all three -->
+		<if test="searchWord1 != null and searchWord2 != null and searchWord3 != null">
+			WHERE mask_name LIKE '%${searchWord1}%' OR mask_name LIKE '%${searchWord2}%' OR mask_name LIKE '%${searchWord3}%'
+		</if>
+		<!-- if searchWord1, searchWord2 is not null, select distinct by searchWord1, searchWord2 -->
+		<if test="searchWord1 != null and searchWord2 != null and searchWord3 == null">
+			WHERE mask_name LIKE '%${searchWord1}%' OR mask_name LIKE '%${searchWord2}%'
+		</if>
+		<!-- if searchWord1 is not null, select by searchWord1 -->
+		<if test="searchWord1 != null and searchWord2 == null and searchWord3 == null">
+			WHERE mask_name LIKE '%${searchWord1}%'
+		</if>
+		<if test="sortCol != null and order != null">
+			ORDER BY ${sortCol} ${order}
+		</if>
+		<if test="limit != null">
+			LIMIT ${limit}
+			<if test="offset != null">
+				OFFSET ${offset}
+			</if>
+		</if>
+	</select>
+	
+
+	<select id="getTop3Mask" resultMap="getAllMaskInfo">
+	 	SELECT DISTINCT A.mask_id, A.mask_name, A.size, A.price, A.blocking_index, 
+	 	A.shape, A.mask_option, A.thumbnail_image_url, 
+		A.purchase_url, A.click_num, A.soldout_status, A.avg_score, A.deletion 
+		FROM masinsa.mask A INNER JOIN masinsa.review B ON A.mask_id = B.mask_id 
+		ORDER BY click_num DESC, avg_score DESC, 
+		(SELECT COUNT(A.mask_id) FROM  masinsa.mask A 
+		INNER JOIN masinsa.review B ON A.mask_id = B.mask_id) DESC LIMIT 3 
+	</select>
+
+  <!-- <resultMap id="getAllMaskInfo" type="Mask"> -->
+  <resultMap id="getAllMaskInfo" type="Mask">
+  	<id column="mask_id" property="id" />
+  	<result column="mask_name" property="name" />
+  	<result column="size" property="size" />
+  	<result column="price" property="price" />
+  	<result column="blocking_index" property="blockingIndex" />
+  	<result column="shape" property="shape" />
+  	<result column="mask_option" property="option" />
+  	<result column="thumbnail_image_url" property="thumbnail" />
+  	<result column="purchase_url" property="purchaseUrl" />
+  	<result column="click_num" property="click" />
+  	<result column="soldout_status" property="soldout" />
+  	<result column="avg_score" property="avgScore" />
+  </resultMap>
+  	
+</mapper>

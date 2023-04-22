@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.masinsa.mapper.WishListMapper">
+	<insert id="addWishList" parameterType="com.spring.masinsa.dto.WishListDTO" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO wishlist (mask_id, member_id) SELECT ${maskId}, ${memberId} FROM DUAL
+		WHERE NOT EXISTS (SELECT wishlist_id FROM wishlist WHERE mask_id=${maskId} AND member_id=${memberId})
+	</insert>
+	
+	<select id="getAllWishList2" resultType="hashmap"> 
+		select A.wishlist_id, A.mask_id, A.member_id, B.mask_name, B.thumbnail_image_url,
+		B.price, B.soldout_status, C.nickname 
+		FROM masinsa.wishlist A INNER JOIN masinsa.mask B ON A.mask_id = B.mask_id 
+		INNER JOIN masinsa.member C ON A.member_id = C.member_id WHERE A.member_id=${memberId}
+		Limit ${limit} OFFSET ${offset}
+	</select>
+	
+	<resultMap id="getAllWishListInfo" type="WishList">
+		<id column="wishlist_id" property="id" />
+		<result column="deletion" property="deletion" />
+		<collection property="mask" javaType="Mask">
+			<id column="mask_id" property="id" />
+			<result column="mask_name" property="name" />
+			<result column="thumbnail_image_url" property="thumbnail" />
+			<result column="price" property="price" />
+			<result column="soldout_status" property="soldout" />
+		</collection>
+		<collection property="member" javaType="Member"> 
+			<id column="member_id" property="id" />
+			<result column="nickname" property="nickname" />
+		</collection>
+	</resultMap>
+	
+	<select id="getMaskWish" resultType="list">
+		SELECT mask_id, mask_name, thumbnail_image_url, price, 
+		soldout_status FROM mask WHERE mask_id = ${maskId}
+	</select>
+	
+	<select id="getMemberWish" resultType="list">
+		SELECT member_id, nickname FROM member WHERE member_id = ${memberId}
+	</select>
+	
+</mapper>
